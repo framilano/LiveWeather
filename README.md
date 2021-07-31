@@ -1,5 +1,5 @@
 # LiveWeather
-Global weather service based on NodeJS with OpenWeatherAPI
+Global weather service based on NodeJS with OpenWeatherAPI and AQI
 
 ## ToDo List
 * Adding city list while typing
