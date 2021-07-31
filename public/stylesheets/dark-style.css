@@ -47,8 +47,8 @@ td {
     border: none;
     background: url("/images/next-icon.png") no-repeat;
     background-size : 100% 100%;
-    width: 85px;
-    height: 85px;
+    width: 50px;
+    height: 50px;
     filter: invert(100);
     transform: rotate(180deg);
 }
@@ -58,8 +58,8 @@ td {
     border: none;
     background: url("../images/next-icon.png") no-repeat;
     background-size : 100% 100%;
-    width: 85px;
-    height: 85px;
+    width: 50px;
+    height: 50px;
     filter: invert(100);
 }
 
@@ -72,7 +72,7 @@ button {
     margin-top: 12%;
     text-align: center;
     transition: margin-top 2s;
-    animation: fadeIn 3s;
+    animation: fadeIn 1s;
 }
 
 @keyframes fadeIn {
