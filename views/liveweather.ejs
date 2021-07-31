@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/light-style.css' id="stylesheet" />
+</head>
+
+<body>
+    <button id="themeswitch"></button>
+    <h1>
+        <%= title %>
+    </h1>
+    <div id="content">
+        <div class="dynamicdiv" id="intro">
+            <p>
+                LiveWeather è un servizio meteo gratuito globale per i prossimi 5 giorni<br>
+                I dati sono disponibili grazie alla 
+                piattaforma <a href="https://openweathermap.org/api">OpenWeatherAPI</a> e <a href="https://openweathermap.org/api/air-pollution">AQI</a>
+            </p>
+        </div>
+        <div>
+            <button hidden=1 id="submitbtnback"></button>
+            <button id="submitbtnforward"></button>
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="module" src="/javascripts/controllers/liveweatherController.js"></script>
+<script src="/javascripts/controllers/themeController.js"></script>
+<script src="http://www.openlayers.org/api/OpenLayers.js"></script>

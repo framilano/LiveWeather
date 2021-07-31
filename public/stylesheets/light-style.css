@@ -1,0 +1,18 @@
+body {
+  font-size: 150%;
+  background-color: #FFFFFF;
+  color: black;
+}
+
+#themeswitch {
+  position: absolute;
+  right: 1%;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  font-size: 150%;
+}
+
