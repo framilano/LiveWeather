@@ -28,7 +28,7 @@ function addFeature(lon, lat, descrizione, iconpath) {
     feature = new OpenLayers.Feature.Vector(
         new OpenLayers.Geometry.Point(lon, lat).transform(epsg4326, projectTo),
         { description: descrizione },
-        { externalGraphic: iconpath, graphicHeight: 125, graphicWidth: 125, graphicXOffset: -12, graphicYOffset: -25 }
+        { externalGraphic: iconpath, graphicHeight: 110, graphicWidth: 110, graphicXOffset: -12, graphicYOffset: -25 }
     );
 
     vectorLayer.addFeatures(feature);

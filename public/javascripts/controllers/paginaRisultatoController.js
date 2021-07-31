@@ -4,9 +4,14 @@ function spawnPaginaRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, tim
     spawnTabellaMeteo(datiMeteo)
     riempiTabellaMeteo(datiMeteo, datiMeteo5Giorni, timezone)
 
+    //Default stile della tabella meteo se non presente la tabella inquinamento
     document.getElementById('meteotable').style.float = null
+    document.getElementById('meteotable').style.width="100%"
+    
+
     //Se la data attuale corrisponde a quella scelta, mostrare i dati sull'inquinamento
     if (new Date((datiMeteo['dt'] + timezone) * 1000).getUTCDate() == new Date((datiInquinamento['dt'] + timezone) * 1000).getUTCDate()) {
+        document.getElementById('meteotable').style.width="50%"
         document.getElementById('meteotable').style.float = "left"
         spawnTabellaInquinamento(datiInquinamento)
         riempiTabellaInquinamento(datiInquinamento)
@@ -21,6 +26,7 @@ function spawnPaginaRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, tim
     document.getElementsByClassName('dynamicdiv')[0].appendChild(divMappaContainer)
     spawnMappaMeteo(datiMeteo5Giorni['city']['coord']['lon'], 
         datiMeteo5Giorni['city']['coord']['lat'], datiMeteo5Giorni['city']['name'], "/images/WeatherPNGs/" + datiMeteo['weather']['0']['icon']+".png")
+
 }
 
 function spawnTabellaMeteo(datiMeteo) {
@@ -42,23 +48,15 @@ function spawnTabellaMeteo(datiMeteo) {
     var tr
     var th
     var td
-    var index = 0
     for (let key in attributiMeteo) {
-        if (index % 2 == 0) {
-            tr = document.createElement('tr')
-        }
+        tr = document.createElement('tr')
+
         th = document.createElement('th')
         td = document.createElement('td')
         th.innerText = key
         td.setAttribute('id', attributiMeteo[key])
         tr.appendChild(th)
         tr.appendChild(td)
-        if (index % 2 != 0) {
-            table.appendChild(tr)
-        }
-        index += 1
-    }
-    if (index % 2 != 0) {
         table.appendChild(tr)
     }
     div.appendChild(table)
@@ -72,23 +70,14 @@ function spawnTabellaInquinamento() {
     var tr
     var th
     var td
-    var index = 0
     for (let key in attributiInquinamento) {
-        if (index % 2 == 0) {
-            tr = document.createElement('tr')
-        }
+        tr = document.createElement('tr')
         th = document.createElement('th')
         td = document.createElement('td')
         th.innerText = key
         td.setAttribute('id', attributiInquinamento[key])
         tr.appendChild(th)
         tr.appendChild(td)
-        if (index % 2 != 0) {
-            table.appendChild(tr)
-        }
-        index += 1
-    }
-    if (index % 2 != 0) {
         table.appendChild(tr)
     }
     div.appendChild(table)
@@ -96,7 +85,8 @@ function spawnTabellaInquinamento() {
 
 var attributiMeteo = {
     "Temperatura": 'temp', "Temperatura (percepita)": 'perc', 'Temperatura minima': 'min',
-    "Temperatura massima": 'max', "Pressione": 'press', "Umidità": "umid", "Velocità vento": "wind", "Visibilità": 'visib', "Alba": "sunrise", "Tramonto": "sunset"
+    "Temperatura massima": 'max', "Pressione": 'press', "Umidità 💧": "umid", "Velocità vento 🌬️": "wind", "Visibilità 👁️": 'visib',
+    "Alba 🌅": "sunrise", "Tramonto 🌇": "sunset"
 }
 
 var attributiInquinamento = {
