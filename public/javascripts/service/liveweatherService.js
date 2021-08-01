@@ -42,7 +42,7 @@ function checkPaginaGiornoInput(giorniRadio, data5days, timezone) {
   return orari
 }
 
-function checkPaginaOrarioInput(orariRadio, giornoselezionato, data5days, timezone) {
+function checkInputOrario(orariRadio, giornoselezionato, data5days, timezone) {
   var orarioselezionato
   orariRadio.forEach(element => {
     if(element.checked) orarioselezionato = element.value.split("-")[1]
@@ -63,4 +63,4 @@ async function generaDatiInquinamento(lon, lat) {
   return datiInquinamento['list'][0]
 }
 
-export {checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput, checkPaginaOrarioInput, generaDatiInquinamento}
+export {checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput, checkInputOrario, generaDatiInquinamento}

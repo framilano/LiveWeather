@@ -1,8 +1,7 @@
-import {checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput, checkPaginaOrarioInput, generaDatiInquinamento} from '/javascripts/service/liveweatherService.js';
+import {checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput, generaDatiInquinamento} from '/javascripts/service/liveweatherService.js';
 import {spawnPaginaLuogo} from '/javascripts/controllers/paginaLuogoController.js';
 import {spawnPaginaGiorno} from '/javascripts/controllers/paginaGiornoController.js';
-import {spawnPaginaOrario} from '/javascripts/controllers/paginaOrarioController.js';
-import {spawnPaginaRisultato} from '/javascripts/controllers/paginaRisultatoController.js';
+import {spawnInputOrario} from '/javascripts/controllers/paginaRisultatoController.js';
 
 document.getElementById('submitbtnforward').addEventListener('click', cambiaScenaAvanti)
 document.getElementById('submitbtnback').addEventListener('click', cambiaScenaIndietro)
@@ -90,30 +89,15 @@ async function cambiaScenaAvanti() {
         if(element.checked) giornoselezionato = element.value.split("/")[0]
       })
       //Cambio dinamico del div
-      attuale.setAttribute('id', 'paginafascia')
-      spawnPaginaOrario(orari)
-      break;
-
-    case "paginafascia":
-      //Ottengo i dati meteo, dati fascia oraria e giorno
-      datiMeteo = checkPaginaOrarioInput(document.getElementsByName('orarioprompt'), giornoselezionato, datiMeteo5Giorni, timezone)
-      //Se nullo, ripeto l'input
-      if (datiMeteo == null) {
-        alert("Inserisci una fascia oraria valida")
-        return
-      }
-      //Salvo la fascia oraria selezionata estraendola dai radio
-      document.getElementsByName('orarioprompt').forEach(element => {
-        if(element.checked) orarioselezionato = element.value.split("/")[0]
-      })
-      //Cambio dinamico del div
-      spawnPaginaRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone)
       attuale.setAttribute('id', 'paginarisultato')
       document.getElementById('submitbtnforward').hidden = 1
       document.getElementById('content').style.marginTop = "0%"
-      break
+      spawnInputOrario(orari, giornoselezionato, datiMeteo5Giorni, datiInquinamento, timezone)
+      break;
   }
 }
+
+
 
 function cambiaScenaIndietro() {
   var attuale = document.getElementsByClassName('dynamicdiv')[0]
@@ -131,18 +115,11 @@ function cambiaScenaIndietro() {
       spawnPaginaLuogo(cittàprecedente)
       break;
 
-    case "paginafascia":
+    case "paginarisultato":
       //Cambio dinamico del div
       attuale.setAttribute('id', 'paginagiorno')
       spawnPaginaGiorno(giorni)
-      break
-
-    case "paginarisultato":
-      //Cambio dinamico del div
-      attuale.setAttribute('id', 'paginafascia')
-      spawnPaginaOrario(orari)
       document.getElementById('submitbtnforward').hidden = 0
-      document.getElementById('content').style.marginTop = "12%"
       break
   }
 }
