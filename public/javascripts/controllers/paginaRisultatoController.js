@@ -43,7 +43,7 @@ function spawnInputOrario(orari,giornoselezionato,datiMeteo5Giorni,datiInquiname
     resultdiv.setAttribute("class", "resultdiv");
     resultdiv.innerHTML = "";
    
-
+    //Creo label per gli orari
     var p = document.createElement("p");
     p.innerText = "Seleziona la fascia oraria per la ricerca";
     dynamicdiv.appendChild(p);
