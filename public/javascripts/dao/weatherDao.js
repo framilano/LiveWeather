@@ -19,4 +19,15 @@ async function fetchAirPollution(lon, lat) {
     .catch(() => alert("Errore di connessione"))
 }
 
-export {fetchWeather5DaysEvery3Hours, fetchAirPollution}
+async function fetchCityNames() {
+    return await fetch('/assets/cities.txt')
+    .then(response => {
+        console.log("Ricevo: ", response.status);
+        console.log("Da: ", response.url);
+        if(response.status != "200") return null;
+        return response.text()
+    })
+    .catch(error => alert("Errore di connessione"))
+}
+
+export {fetchWeather5DaysEvery3Hours, fetchAirPollution, fetchCityNames}

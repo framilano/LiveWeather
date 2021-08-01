@@ -2,11 +2,13 @@ import { spawnMappaMeteo } from "/javascripts/service/openlayerService.js";
 import { checkInputOrario } from "/javascripts/service/liveweatherService.js";
 
 var attributiMeteo = {
-    Temperatura: "temp",
-    "Temperatura (percepita)": "perc",
-    "Temperatura minima": "min",
-    "Temperatura massima": "max",
-    Pressione: "press",
+    "Temperatura 🌡️": "temp",
+    "Temperatura (percepita) 🌡️": "perc",
+    "Temperatura massima ☀️": "max",
+    "Temperatura minima ❄️": "min",
+    "Precipitazioni 🌧️": "pop",
+    "Volume precipitazioni (3h)": 'rain',
+    "Pressione 🏋️": "press",
     "Umidità 💧": "umid",
     "Velocità vento 🌬️": "wind",
     "Visibilità 👁️": "visib",
@@ -15,7 +17,7 @@ var attributiMeteo = {
 };
 
 var attributiInquinamento = {
-    "Indice qualità dell'aria": "aqi",
+    "Indice qualità dell'aria 🌿": "aqi",
     "Concentrazione di monossido di carbonio (CO)": "co",
     "Concentrazione di monossido di nitrogeno (NO)": "no",
     "Concentrazione di diossido di nitrogeno (NO2)": "no2",
@@ -186,8 +188,11 @@ function spawnTabellaInquinamento() {
 function riempiTabellaMeteo(datiMeteo, datiMeteo5Giorni, timezone) {
     document.getElementById("temp").innerText = (parseFloat(datiMeteo["main"]["temp"]) - 273.15).toFixed(1).toString() + "°C";
     document.getElementById("perc").innerText = (parseFloat(datiMeteo["main"]["feels_like"]) - 273.15).toFixed(1).toString() + "°C";
-    document.getElementById("min").innerText = (parseFloat(datiMeteo["main"]["temp_min"]) - 273.15).toFixed(1).toString() + "°C";
     document.getElementById("max").innerText = (parseFloat(datiMeteo["main"]["temp_max"]) - 273.15).toFixed(1).toString() + "°C";
+    document.getElementById("min").innerText = (parseFloat(datiMeteo["main"]["temp_min"]) - 273.15).toFixed(1).toString() + "°C";
+    document.getElementById("pop").innerText = (parseFloat(datiMeteo["pop"]) * 100).toFixed(1).toString() + "%"
+    if (datiMeteo["rain"] == undefined) document.getElementById("rain").innerText = "🤷‍♂";
+    else document.getElementById("rain").innerHTML = datiMeteo["rain"]['3h'] + " mm<sup>3</sup>";
     document.getElementById("press").innerText = datiMeteo["main"]["pressure"] + " hPa";
     document.getElementById("umid").innerText = datiMeteo["main"]["humidity"] + "%";
     document.getElementById("wind").innerText = datiMeteo["wind"]["speed"] + " m/s";
@@ -205,15 +210,15 @@ function riempiTabellaMeteo(datiMeteo, datiMeteo5Giorni, timezone) {
 }
 
 function riempiTabellaInquinamento(datiInquinamento) {
-    document.getElementById("aqi").innerText = datiInquinamento["main"]["aqi"];
-    document.getElementById("co").innerText = datiInquinamento["components"]["co"] + " μg/m3";
-    document.getElementById("no").innerText = datiInquinamento["components"]["no"] + " μg/m3";
-    document.getElementById("no2").innerText = datiInquinamento["components"]["no2"] + " μg/m3";
-    document.getElementById("o3").innerText = datiInquinamento["components"]["o3"] + " μg/m3";
-    document.getElementById("so2").innerText = datiInquinamento["components"]["so2"] + " μg/m3";
-    document.getElementById("pm2_5").innerText = datiInquinamento["components"]["pm2_5"] + " μg/m3";
-    document.getElementById("pm10").innerText = datiInquinamento["components"]["pm10"] + " μg/m3";
-    document.getElementById("nh3").innerText = datiInquinamento["components"]["nh3"] + " μg/m3";
+    document.getElementById("aqi").innerHTML = datiInquinamento["main"]["aqi"];
+    document.getElementById("co").innerHTML = datiInquinamento["components"]["co"] + " μg/m<sup>3</sup>";
+    document.getElementById("no").innerHTML = datiInquinamento["components"]["no"] + " μg/m<sup>3</sup>";
+    document.getElementById("no2").innerHTML = datiInquinamento["components"]["no2"] + " μg/m<sup>3</sup>";
+    document.getElementById("o3").innerHTML = datiInquinamento["components"]["o3"] + " μg/m<sup>3</sup>";
+    document.getElementById("so2").innerHTML = datiInquinamento["components"]["so2"] + " μg/m<sup>3</sup>";
+    document.getElementById("pm2_5").innerHTML = datiInquinamento["components"]["pm2_5"] + " μg/m<sup>3</sup>";
+    document.getElementById("pm10").innerHTML = datiInquinamento["components"]["pm10"] + " μg/m<sup>3</sup>";
+    document.getElementById("nh3").innerHTML = datiInquinamento["components"]["nh3"] + " μg/m<sup>3</sup>";
 }
 
 export { spawnPaginaRisultato, spawnInputOrario };

@@ -107,6 +107,7 @@ function cambiaScenaIndietro() {
       attuale.setAttribute('id', 'intro')
       spawnIntro()
       document.getElementById('submitbtnback').hidden = 1
+      document.getElementById('content').style.marginTop = "12%"
       break;
 
     case "paginagiorno":
@@ -128,7 +129,8 @@ function spawnIntro() {
   var div = document.getElementsByClassName('dynamicdiv')[0]
   div.innerHTML = ""
   var p = document.createElement('p')
-  p.innerHTML = "LiveWeather è un servizio meteo gratuito con aggiornamenti in tempo reale ogni 3 ore<br>"+
-  "I dati sono disponibili grazie alla piattaforma OpenWeatherAPI"
+  p.innerHTML = "LiveWeather è un servizio meteo gratuito globale per i prossimi 5 giorni<br>"
+  +"I dati sono disponibili grazie alla piattaforma <a href=\"https://openweathermap.org/api\">"
+  +"OpenWeatherAPI</a> e <a href=\"https://openweathermap.org/api/air-pollution\">AQI</a>"
   div.appendChild(p)
 }

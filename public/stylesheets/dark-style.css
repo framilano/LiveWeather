@@ -10,37 +10,41 @@ h1 {
 }
 
 table {
-  width: 50%;
   margin-bottom: 5%;
+  width: 50%;
 }
 
 th {
   border: none;
   background-color: #121212;
-  height: 3%;
-  font-size: 115%;
+  font-size: 90%;
   border-bottom-right-radius: 0%;
   border-top-right-radius: 0%;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   padding-top: 2%;
   padding-bottom: 2%;
-  margin-right: 2%;
-  width: 75%;
+
 }
 
 td {
   border: none;
   background-color: #121212;
-  font-size: 115%;
-  margin-left: 2%;
+  font-size: 90%;
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
   border-top-left-radius: 0%;
   border-bottom-left-radius: 0%;
   padding-top: 2%;
   padding-bottom: 2%;
-  width: 25%;
+
+}
+
+button {
+  border: none;
+  border-radius: 20px;
+  font-size: 100%;
+  margin-top: 5%;
 }
 
 #submitbtnforward {
@@ -62,13 +66,6 @@ td {
   width: 50px;
   height: 50px;
   filter: invert(100);
-}
-
-button {
-  border: none;
-  border-radius: 20px;
-  font-size: 100%;
-  margin-top: 5%;
 }
 
 #content {
