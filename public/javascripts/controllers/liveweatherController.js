@@ -1,8 +1,10 @@
 import {checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput, generaDatiInquinamento} from '/javascripts/service/liveweatherService.js';
+import {spawnIntro} from '/javascripts/controllers/paginaIntroController.js';
 import {spawnPaginaLuogo} from '/javascripts/controllers/paginaLuogoController.js';
 import {spawnPaginaGiorno} from '/javascripts/controllers/paginaGiornoController.js';
 import {spawnInputOrario} from '/javascripts/controllers/paginaRisultatoController.js';
 
+//Listener per bottoni di avanti e indietro e tasto invio
 document.getElementById('submitbtnforward').addEventListener('click', cambiaScenaAvanti)
 document.getElementById('submitbtnback').addEventListener('click', cambiaScenaIndietro)
 document.addEventListener('keyup', event => {
@@ -34,8 +36,6 @@ var orarioselezionato
 var datiMeteo
 //Contiene i dati inquinamento finali
 var datiInquinamento
-
-
 
 async function cambiaScenaAvanti() {
   var attuale = document.getElementsByClassName('dynamicdiv')[0]
@@ -97,8 +97,6 @@ async function cambiaScenaAvanti() {
   }
 }
 
-
-
 function cambiaScenaIndietro() {
   var attuale = document.getElementsByClassName('dynamicdiv')[0]
   switch (attuale.getAttribute('id')) {
@@ -121,16 +119,9 @@ function cambiaScenaIndietro() {
       attuale.setAttribute('id', 'paginagiorno')
       spawnPaginaGiorno(giorni)
       document.getElementById('submitbtnforward').hidden = 0
+      document.getElementById('content').style.marginTop = "12%"
       break
   }
 }
 
-function spawnIntro() {
-  var div = document.getElementsByClassName('dynamicdiv')[0]
-  div.innerHTML = ""
-  var p = document.createElement('p')
-  p.innerHTML = "LiveWeather è un servizio meteo gratuito globale per i prossimi 5 giorni<br>"
-  +"I dati sono disponibili grazie alla piattaforma <a href=\"https://openweathermap.org/api\">"
-  +"OpenWeatherAPI</a> e <a href=\"https://openweathermap.org/api/air-pollution\">AQI</a>"
-  div.appendChild(p)
-}
+spawnIntro()

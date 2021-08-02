@@ -1,4 +1,5 @@
-import { fetchCityNames } from '/javascripts/dao/weatherDao.js'
+import { cittàAttuale } from '/javascripts/service/liveweatherService.js';
+//import { fetchCityNames } from '/javascripts/dao/weatherDao.js'
 
 async function spawnPaginaLuogo(cittàprecedente) {
   //Azzero il dynamicdiv
@@ -8,7 +9,7 @@ async function spawnPaginaLuogo(cittàprecedente) {
   //Creo il label e l'input cityprompt
   var label = document.createElement("label");
   var input = document.createElement("input");
-  var datalist = document.createElement("datalist");
+  //var datalist = document.createElement("datalist");
 
   label.setAttribute("for", "cityprompt");
   label.innerHTML = "Inserisci nome città <br>";
@@ -18,7 +19,7 @@ async function spawnPaginaLuogo(cittàprecedente) {
   //input.setAttribute("list", "citylist");
 
   //datalist.setAttribute("id", "citylist");
-  
+
   /**Logica recupero città
   var listacittà = await fetchCityNames();
   listacittà = listacittà.split("\n")
@@ -39,21 +40,29 @@ async function spawnPaginaLuogo(cittàprecedente) {
   //Metti a fuoco il prompt appena entrato nella pagina
   document.getElementById("cityprompt").focus();
   document.getElementById("cityprompt").select();
+
+  var p = document.createElement("p");
+
+  //Aggiungo bottone dell'ultima ricerca effettuata
   if (cittàprecedente != null) {
-    var p = document.createElement("p");
-    var button = document.createElement("button");
+    var buttonLastCity = document.createElement("button");
     p.innerText = "Hai cercato recentemente: ";
-    button.innerText = cittàprecedente;
-    button.setAttribute(
-      "onclick",
-      "document.getElementById('cityprompt').value=" +
-      '"' +
-      cittàprecedente +
-      '"'
-    );
-    p.appendChild(button);
-    div.appendChild(p);
+    buttonLastCity.innerText = cittàprecedente;
+    buttonLastCity.setAttribute("onclick",
+      "document.getElementById('cityprompt').value=" + '"' + cittàprecedente + '"');
+    p.appendChild(buttonLastCity);
   }
+
+  //Aggiungo bottone della posizione attuale
+  if (cittàAttuale != null) {
+    var buttonCittàAttuale = document.createElement("button");
+    buttonCittàAttuale.innerText = "Posizione attuale"
+    buttonCittàAttuale.setAttribute("onclick",
+      "document.getElementById('cityprompt').value=" + '"' + cittàAttuale + '"');
+    p.appendChild(buttonCittàAttuale)
+  }
+
+  div.appendChild(p);
 }
 
 export { spawnPaginaLuogo };

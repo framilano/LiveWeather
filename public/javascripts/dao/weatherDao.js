@@ -8,7 +8,13 @@ function handleResponse(response) {
 }
 
 async function fetchWeather5DaysEvery3Hours(city) {
-    return await fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&lang=it&appid=' + apikey)
+    return await fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=metric&lang=it&appid=' + apikey)
+    .then(handleResponse)
+    .catch(() => alert("Errore di connessione"))
+}
+
+async function fetchWeatherCurrentLocation(lon, lat) {
+    return await fetch('https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&units=metric&lang=it&appid='+apikey)
     .then(handleResponse)
     .catch(() => alert("Errore di connessione"))
 }
@@ -30,4 +36,6 @@ async function fetchCityNames() {
     .catch(error => alert("Errore di connessione"))
 }
 
-export {fetchWeather5DaysEvery3Hours, fetchAirPollution, fetchCityNames}
+
+
+export {fetchWeather5DaysEvery3Hours, fetchWeatherCurrentLocation, fetchAirPollution, fetchCityNames}

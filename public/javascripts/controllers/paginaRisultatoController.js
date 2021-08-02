@@ -186,10 +186,10 @@ function spawnTabellaInquinamento() {
 }
 
 function riempiTabellaMeteo(datiMeteo, datiMeteo5Giorni, timezone) {
-    document.getElementById("temp").innerText = (parseFloat(datiMeteo["main"]["temp"]) - 273.15).toFixed(1).toString() + "°C";
-    document.getElementById("perc").innerText = (parseFloat(datiMeteo["main"]["feels_like"]) - 273.15).toFixed(1).toString() + "°C";
-    document.getElementById("max").innerText = (parseFloat(datiMeteo["main"]["temp_max"]) - 273.15).toFixed(1).toString() + "°C";
-    document.getElementById("min").innerText = (parseFloat(datiMeteo["main"]["temp_min"]) - 273.15).toFixed(1).toString() + "°C";
+    document.getElementById("temp").innerText = (parseFloat(datiMeteo["main"]["temp"])).toFixed(1).toString() + "°C";
+    document.getElementById("perc").innerText = (parseFloat(datiMeteo["main"]["feels_like"])).toFixed(1).toString() + "°C";
+    document.getElementById("max").innerText = (parseFloat(datiMeteo["main"]["temp_max"])).toFixed(1).toString() + "°C";
+    document.getElementById("min").innerText = (parseFloat(datiMeteo["main"]["temp_min"])).toFixed(1).toString() + "°C";
     document.getElementById("pop").innerText = (parseFloat(datiMeteo["pop"]) * 100).toFixed(1).toString() + "%"
     if (datiMeteo["rain"] == undefined) document.getElementById("rain").innerText = "🤷‍♂";
     else document.getElementById("rain").innerHTML = datiMeteo["rain"]['3h'] + " mm<sup>3</sup>";
