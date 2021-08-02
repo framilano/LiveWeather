@@ -126,19 +126,26 @@ function spawnSezioneRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, ti
     spawnMappaMeteo(datiMeteo5Giorni["city"]["coord"]["lon"], datiMeteo5Giorni["city"]["coord"]["lat"],
         datiMeteo5Giorni["city"]["name"], "/images/WeatherPNGs/" + datiMeteo["weather"]["0"]["icon"] + ".png"
     );
+
+    //Prendo il content per aggiungere il fading
+    var content = document.getElementById('content')
+    //Aggiungo effetto di fading in ingresso
+    $(content).hide().fadeIn(1000);
 }
 
 function spawnTabellaMeteo(datiMeteo) {
+    console.log(datiMeteo)
     var resultdiv = document.getElementsByClassName("resultdiv")[0];
 
     //Creo un p di descrizione del meteo e un'icona descrittiva
     var img = document.createElement("img");
     img.setAttribute("src", "/images/WeatherPNGs/" + datiMeteo["weather"][0]["icon"] + ".png");
-    img.setAttribute("alt", datiMeteo["weather"][0]["description"]);
+    img.setAttribute("title", datiMeteo["weather"][0]["description"]);
     var descriptionP = document.createElement("p");
     descriptionP.setAttribute("id", "descrizione");
     descriptionP.innerHTML =
-        "Condizioni meteo: " + datiMeteo["weather"][0]["description"];
+        "Condizioni meteo: " + datiMeteo["weather"][0]["description"] + "<br><br>" +
+        "Stai visualizzando le condizioni meteo del " + datiMeteo['dt_txt'];
     resultdiv.appendChild(img);
     resultdiv.appendChild(descriptionP);
 

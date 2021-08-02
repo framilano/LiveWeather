@@ -167,6 +167,7 @@ button {
 @media only screen and (max-width: 768px) {
 
   .dynamicdiv {
+    width: -moz-fit-content;
     width: fit-content;
   }
 

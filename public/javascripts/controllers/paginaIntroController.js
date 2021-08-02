@@ -36,6 +36,8 @@ async function spawnIntro() {
 
         //Aggiungo un'immagine meteo
         imgMeteoAttuale.setAttribute('src', "/images/WeatherPNGs/" + datiMeteoAttuali["weather"][0]["icon"] + ".png")
+        imgMeteoAttuale.setAttribute("title", datiMeteoAttuali["weather"][0]["description"]);
+
     }, () => {
         pMeteo.innerText = "Non è possibile verificare la tua posizione attuale\nAssicurati di aver attivato la geolocalizzazione sul tuo Browser"
     })
