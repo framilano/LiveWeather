@@ -110,14 +110,8 @@ function spawnSezioneRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, ti
     spawnTabellaMeteo(datiMeteo);
     riempiTabellaMeteo(datiMeteo, datiMeteo5Giorni, timezone);
 
-    //Default stile della tabella meteo se non presente la tabella inquinamento
-    document.getElementById("meteotable").style.float = null;
-    document.getElementById("meteotable").style.width = "100%";
-
     //Se la data attuale corrisponde a quella scelta, mostrare i dati sull'inquinamento
     if (new Date((datiMeteo["dt"] + timezone) * 1000).getUTCDate() == new Date((datiInquinamento["dt"] + timezone) * 1000).getUTCDate()) {
-        document.getElementById("meteotable").style.width = "50%";
-        document.getElementById("meteotable").style.float = "left";
         spawnTabellaInquinamento(datiInquinamento);
         riempiTabellaInquinamento(datiInquinamento);
     }
