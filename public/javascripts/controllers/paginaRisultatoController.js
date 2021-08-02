@@ -32,19 +32,19 @@ function aggiungiRadioListener(orariRadio, datiMeteo, giornoselezionato, datiMet
     orariRadio.forEach((element) => {
         element.addEventListener("click", () => {
             datiMeteo = checkInputOrario(orariRadio, giornoselezionato, datiMeteo5Giorni, timezone);
-            spawnPaginaRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone);
+            spawnSezioneRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone);
         });
     });
 }
 
-function spawnInputOrario(orari,giornoselezionato,datiMeteo5Giorni,datiInquinamento,timezone) {
+async function spawnInputOrario(orari, giornoselezionato, datiMeteo5Giorni, datiInquinamento, timezone) {
     //Creo la sezione di result con tabelle e mappa, le appendo al div dinamico
     var dynamicdiv = document.getElementsByClassName("dynamicdiv")[0];
     dynamicdiv.innerHTML = "";
     var resultdiv = document.createElement("div");
     resultdiv.setAttribute("class", "resultdiv");
     resultdiv.innerHTML = "";
-   
+
     //Creo label per gli orari
     var p = document.createElement("p");
     p.innerText = "Seleziona la fascia oraria per la ricerca";
@@ -92,14 +92,16 @@ function spawnInputOrario(orari,giornoselezionato,datiMeteo5Giorni,datiInquiname
     dynamicdiv.appendChild(resultdiv);
 
     //Genero la sezione risultato
-    var datiMeteo = checkInputOrario(orariRadio,giornoselezionato,datiMeteo5Giorni,timezone);
-    spawnPaginaRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone);
+    var datiMeteo = checkInputOrario(orariRadio, giornoselezionato, datiMeteo5Giorni, timezone);
+    spawnSezioneRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone);
 
     //Aggiungo Listener per i radio appena creati
     aggiungiRadioListener(orariRadio, datiMeteo, giornoselezionato, datiMeteo5Giorni, timezone, datiInquinamento);
+
+
 }
 
-function spawnPaginaRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone) {
+function spawnSezioneRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone) {
     //Azzero il result div
     var resultdiv = document.getElementsByClassName("resultdiv")[0];
     resultdiv.innerHTML = "";
@@ -185,6 +187,7 @@ function spawnTabellaInquinamento() {
     resultdiv.appendChild(table);
 }
 
+//Riempio la tabella Meteo con i dati ottenuti da fetch
 function riempiTabellaMeteo(datiMeteo, datiMeteo5Giorni, timezone) {
     document.getElementById("temp").innerText = (parseFloat(datiMeteo["main"]["temp"])).toFixed(1).toString() + "°C";
     document.getElementById("perc").innerText = (parseFloat(datiMeteo["main"]["feels_like"])).toFixed(1).toString() + "°C";
@@ -209,6 +212,7 @@ function riempiTabellaMeteo(datiMeteo, datiMeteo5Giorni, timezone) {
     document.getElementById("sunset").innerText = sunsethour + ":" + sunsetminute;
 }
 
+//Riempio la tabella di Inquinamento con i dati ottenuti da fetch
 function riempiTabellaInquinamento(datiInquinamento) {
     document.getElementById("aqi").innerHTML = datiInquinamento["main"]["aqi"];
     document.getElementById("co").innerHTML = datiInquinamento["components"]["co"] + " μg/m<sup>3</sup>";
@@ -221,4 +225,4 @@ function riempiTabellaInquinamento(datiInquinamento) {
     document.getElementById("nh3").innerHTML = datiInquinamento["components"]["nh3"] + " μg/m<sup>3</sup>";
 }
 
-export { spawnPaginaRisultato, spawnInputOrario };
+export { spawnInputOrario };

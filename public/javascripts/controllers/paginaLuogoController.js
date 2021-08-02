@@ -3,8 +3,8 @@ import { cittàAttuale } from '/javascripts/service/liveweatherService.js';
 
 async function spawnPaginaLuogo(cittàprecedente) {
   //Azzero il dynamicdiv
-  var div = document.getElementsByClassName("dynamicdiv")[0];
-  div.innerHTML = "";
+  var dynamicdiv = document.getElementsByClassName("dynamicdiv")[0];
+  dynamicdiv.innerHTML = "";
 
   //Creo il label e l'input cityprompt
   var label = document.createElement("label");
@@ -33,8 +33,8 @@ async function spawnPaginaLuogo(cittàprecedente) {
     datalist.appendChild(option)
   });
   **/
-  div.appendChild(label);
-  div.appendChild(input);
+  dynamicdiv.appendChild(label);
+  dynamicdiv.appendChild(input);
   //div.appendChild(datalist);
 
   //Metti a fuoco il prompt appena entrato nella pagina
@@ -62,7 +62,12 @@ async function spawnPaginaLuogo(cittàprecedente) {
     p.appendChild(buttonCittàAttuale)
   }
 
-  div.appendChild(p);
+  dynamicdiv.appendChild(p);
+
+  //Prendo il content per aggiungere il fading
+  var content = document.getElementById('content')
+  //Aggiungo effetto di fading in ingresso
+  $(content).hide().fadeIn(1000);
 }
 
 export { spawnPaginaLuogo };

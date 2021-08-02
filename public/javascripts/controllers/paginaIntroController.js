@@ -19,6 +19,8 @@ async function spawnIntro() {
     dynamicdiv.appendChild(meteoattualediv)
     dynamicdiv.appendChild(imgMeteoAttuale)
 
+
+    //Ottengo posizione attuale
     navigator.geolocation.getCurrentPosition(async (data) => {
         var datiMeteoAttuali = await retrieveLocalWeather(data)
         var descrizione = datiMeteoAttuali['weather'][0]['description']
@@ -27,17 +29,24 @@ async function spawnIntro() {
         descrizione = descrizione.split("")
         descrizione[0] = descrizione[0].toUpperCase()
         descrizione = descrizione.toString().replaceAll(',', '')
-        
+
         //Aggiungo una breve descrizione del meteo
         pMeteo.innerText = "In questo momento a " + datiMeteoAttuali['name'] + " la temperatura è " +
-        "di " + datiMeteoAttuali['main']['temp'] + " gradi.\n\n" + descrizione
+            "di " + datiMeteoAttuali['main']['temp'] + " gradi.\n\n" + descrizione
 
         //Aggiungo un'immagine meteo
         imgMeteoAttuale.setAttribute('src', "/images/WeatherPNGs/" + datiMeteoAttuali["weather"][0]["icon"] + ".png")
     }, () => {
         pMeteo.innerText = "Non è possibile verificare la tua posizione attuale\nAssicurati di aver attivato la geolocalizzazione sul tuo Browser"
     })
+
+    //Aggiungo il messaggio di successo o di errore al termine della geolocalizzazione
     meteoattualediv.appendChild(pMeteo)
+
+    //Prendo il content per aggiungere il fading
+    var content = document.getElementById('content')
+    //Aggiungo effetto di fading in ingresso
+    $(content).hide().fadeIn(1000);
 }
 
 export { spawnIntro }

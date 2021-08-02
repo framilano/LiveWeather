@@ -37,7 +37,7 @@ function addFeature(lon, lat, descrizione, iconpath) {
 }
 
 function spawnMappaMeteo(lon, lat, descrizione, iconpath) {
-    map = new OpenLayers.Map("DivMappa");
+    map = new OpenLayers.Map("DivMappa", {interactions: [], controls: []});
     map.addLayer(new OpenLayers.Layer.OSM());
 
     epsg4326 = new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
@@ -57,6 +57,7 @@ function spawnMappaMeteo(lon, lat, descrizione, iconpath) {
     };
 
     map.addControl(controls['selector']);
+
     controls['selector'].activate();
 }
 

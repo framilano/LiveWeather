@@ -42,7 +42,6 @@ button {
   border: none;
   border-radius: 20px;
   font-size: 100%;
-  margin-top: 5%;
 }
 
 #submitbtnforward {
@@ -69,17 +68,6 @@ button {
 #content {
   margin-top: 12%;
   text-align: center;
-  transition: margin-top 1s;
-  animation: fadeIn 2s;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 #intro {
@@ -98,6 +86,7 @@ button {
 }
 
 #themeswitch {
+  position: absolute;
   right: 1%;
   background-color: Transparent;
   background-repeat: no-repeat;
@@ -114,6 +103,7 @@ button {
 
 #DivMappaContainer {
   height: 500px;
+  margin-bottom: 5%;
 }
 
 #DivMappa {
@@ -125,20 +115,6 @@ button {
 .dynamicdiv {
   margin-bottom: 2%;
   text-align: center;
-}
-
-@media only screen and (max-width: 768px) {
-  input {
-    width: 100%;
-  }
-
-  th {
-    font-size: 75%;
-  }
-
-  td {
-    font-size: 75%;
-  }
 }
 
 .radio-toolbar input[type="radio"] {
@@ -172,3 +148,18 @@ button {
 .radio-toolbar label{
     margin: 1%;
 }
+
+@media only screen and (max-width: 768px) {
+  input {
+    width: 100%;
+  }
+
+  th {
+    font-size: 75%;
+  }
+
+  td {
+    font-size: 75%;
+  }
+}
+
