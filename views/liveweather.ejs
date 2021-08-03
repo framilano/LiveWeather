@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
         <%= title %>
     </title>
@@ -13,14 +13,14 @@
 </head>
 
 <body>
-    
+
     <button title="themebutton" id="themeswitch"></button>
     <h1>
         <%= title %>
     </h1>
     <div id="content">
         <div class="dynamicdiv" id="intro"></div>
-        <div>
+        <div id="navbuttons">
             <button title="backbutton" hidden=1 id="submitbtnback"></button>
             <button title="forwardbutton" id="submitbtnforward"></button>
         </div>
@@ -28,6 +28,7 @@
 </body>
 
 </html>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="module" src="/javascripts/controllers/liveweatherController.js"></script>
 <script src="/javascripts/controllers/themeController.js"></script>

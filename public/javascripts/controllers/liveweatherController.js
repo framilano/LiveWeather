@@ -1,16 +1,17 @@
-import {checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput, generaDatiInquinamento} from '/javascripts/service/liveweatherService.js';
-import {spawnIntro} from '/javascripts/controllers/paginaIntroController.js';
-import {spawnPaginaLuogo} from '/javascripts/controllers/paginaLuogoController.js';
-import {spawnPaginaGiorno} from '/javascripts/controllers/paginaGiornoController.js';
-import {spawnInputOrario} from '/javascripts/controllers/paginaRisultatoController.js';
+import { checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput, generaDatiInquinamento } from '/javascripts/service/liveweatherService.js';
+import { spawnIntro } from '/javascripts/controllers/paginaIntroController.js';
+import { spawnPaginaLuogo } from '/javascripts/controllers/paginaLuogoController.js';
+import { spawnPaginaGiorno } from '/javascripts/controllers/paginaGiornoController.js';
+import { spawnInputOrario } from '/javascripts/controllers/paginaRisultatoController.js';
 
 //Listener per bottoni di avanti e indietro e tasto invio
 document.getElementById('submitbtnforward').addEventListener('click', cambiaScenaAvanti)
 document.getElementById('submitbtnback').addEventListener('click', cambiaScenaIndietro)
 document.addEventListener('keyup', event => {
-  if (event.key=="Enter") cambiaScenaAvanti()
+  if (event.key == "Enter") cambiaScenaAvanti()
 })
 
+//Attributi condivisi durante la navigazione delle varie sezioni del sito
 
 //Contiene le città precedentemente cercate
 var cittàprecedente
@@ -30,15 +31,13 @@ var giorni
 var giornoselezionato
 //Contiene gli orari disponibili per il giornoselezionato
 var orari
-//Contiene l'orario selezionato
-var orarioselezionato
-//Contiene i dati meteo finali singoli
-var datiMeteo
 //Contiene i dati inquinamento finali
 var datiInquinamento
+//Classe attualmente utilizzata dal dynamicdiv
+var attuale
 
 async function cambiaScenaAvanti() {
-  var attuale = document.getElementsByClassName('dynamicdiv')[0]
+  attuale = document.getElementsByClassName('dynamicdiv')[0]
   switch (attuale.getAttribute('id')) {
     case "intro":
       //Recupero l'ultima città ricercata
@@ -55,7 +54,7 @@ async function cambiaScenaAvanti() {
       datiMeteo5Giorni = await checkPaginaLuogoInput(document.getElementById('cityprompt').value)
       //Controllo se la request ha restituito un risultato nullo
       if (datiMeteo5Giorni == null) {
-        alert("Inserisci un luogo valido")
+        document.getElementById('cityprompt').style.border = "3px solid red"
         return
       }
 
@@ -75,7 +74,7 @@ async function cambiaScenaAvanti() {
       attuale.setAttribute('id', 'paginagiorno')
       spawnPaginaGiorno(giorni)
       break;
-    
+
     case "paginagiorno":
       //Ottengo gli orari possibili per il giorno selezionato
       orari = checkPaginaGiornoInput(document.getElementsByName('giornoprompt'), datiMeteo5Giorni, timezone)
@@ -86,7 +85,7 @@ async function cambiaScenaAvanti() {
       }
       //Salvo il giorno selezionato estraendolo dai radio
       document.getElementsByName('giornoprompt').forEach(element => {
-        if(element.checked) giornoselezionato = element.value.split("/")[0]
+        if (element.checked) giornoselezionato = element.value.split("/")[0]
       })
       //Cambio dinamico del div
       attuale.setAttribute('id', 'paginarisultato')
@@ -98,14 +97,14 @@ async function cambiaScenaAvanti() {
 }
 
 function cambiaScenaIndietro() {
-  var attuale = document.getElementsByClassName('dynamicdiv')[0]
+  attuale = document.getElementsByClassName('dynamicdiv')[0]
   switch (attuale.getAttribute('id')) {
     case "paginaluogo":
       //Cambio dinamico del div
       attuale.setAttribute('id', 'intro')
       spawnIntro()
       document.getElementById('submitbtnback').hidden = 1
-      document.getElementById('content').style.marginTop = "12%"
+      document.getElementById('content').style.marginTop = "7%"
       break;
 
     case "paginagiorno":
@@ -119,9 +118,11 @@ function cambiaScenaIndietro() {
       attuale.setAttribute('id', 'paginagiorno')
       spawnPaginaGiorno(giorni)
       document.getElementById('submitbtnforward').hidden = 0
-      document.getElementById('content').style.marginTop = "12%"
+      document.getElementById('content').style.marginTop = "7%"
       break
   }
 }
 
 spawnIntro()
+
+export { cittàselezionata }

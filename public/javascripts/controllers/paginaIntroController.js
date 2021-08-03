@@ -11,10 +11,12 @@ async function spawnIntro() {
     meteoattualediv.setAttribute('id', 'meteoattuale')
     dynamicdiv.innerHTML = ""
 
+    //Descrizione introduttiva
     pIntro.innerHTML = "LiveWeather è un servizio meteo gratuito globale per i prossimi 5 giorni<br>"
         + "I dati sono disponibili grazie alla piattaforma <a href=\"https://openweathermap.org/api\">"
         + "OpenWeatherAPI</a> e <a href=\"https://openweathermap.org/api/air-pollution\">AQI</a>"
 
+        //Appendo l'intro ed il meteoattuale al dynamicdiv
     dynamicdiv.appendChild(pIntro)
     dynamicdiv.appendChild(meteoattualediv)
     dynamicdiv.appendChild(imgMeteoAttuale)

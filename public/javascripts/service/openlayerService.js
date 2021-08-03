@@ -61,5 +61,4 @@ function spawnMappaMeteo(lon, lat, descrizione, iconpath) {
     controls['selector'].activate();
 }
 
-
 export {spawnMappaMeteo}

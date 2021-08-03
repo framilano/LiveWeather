@@ -1,6 +1,7 @@
 import { fetchWeather5DaysEvery3Hours, fetchAirPollution, fetchWeatherCurrentLocation } from '/javascripts/dao/weatherDao.js';
 
 var cittàAttuale = null
+var orarioselezionato = null
 
 function filtraGiorni(data5daysList, timezone) {
   var dates = []
@@ -45,7 +46,6 @@ function checkPaginaGiornoInput(giorniRadio, data5days, timezone) {
 }
 
 function checkInputOrario(orariRadio, giornoselezionato, data5days, timezone) {
-  var orarioselezionato
   orariRadio.forEach(element => {
     if (element.checked) orarioselezionato = element.value.split("-")[1]
   })
@@ -72,4 +72,4 @@ async function retrieveLocalWeather(data) {
 }
 
 export { checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput,
-   checkInputOrario, generaDatiInquinamento, retrieveLocalWeather, cittàAttuale }
+   checkInputOrario, generaDatiInquinamento, retrieveLocalWeather, cittàAttuale, orarioselezionato }

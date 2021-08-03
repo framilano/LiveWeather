@@ -7,6 +7,7 @@ body {
 
 h1 {
   text-align: center;
+  font-size: 400%;
 }
  table {
    width: 100%;
@@ -46,12 +47,20 @@ button {
   font-size: 100%;
 }
 
+
+
 #meteotable {
   margin-bottom: 2%;
 }
 
 #inquinamentotable {
   margin-bottom: 2%;
+}
+
+#navbuttons {
+  position: fixed;
+  bottom: 2%;
+  right: 2%;
 }
 
 #submitbtnforward {
@@ -76,7 +85,7 @@ button {
 }
 
 #content {
-  margin-top: 12%;
+  margin-top: 7%;
   text-align: center;
 }
 
@@ -90,7 +99,7 @@ button {
   text-align: center;
   font-size: 150%;
   border-radius: 50px;
-  border: none;
+  border: 3px solid #FFFFFF;
 }
 
 #themeswitch {
@@ -165,6 +174,11 @@ button {
 }
 
 @media only screen and (max-width: 768px) {
+
+  h1 {
+    text-align: center;
+    font-size: 200%;
+  }
 
   .dynamicdiv {
     width: -moz-fit-content;
