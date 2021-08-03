@@ -13,6 +13,7 @@ async function spawnPaginaLuogo(cittàprecedente) {
   label.innerHTML = "Inserisci nome città <br>";
   input.setAttribute("type", "text");
   input.setAttribute("name", "");
+  input.setAttribute("id", "cityprompt")
 
   //Appendo il cityprompt ed il suo label al dynamicdiv
   dynamicdiv.appendChild(label);
