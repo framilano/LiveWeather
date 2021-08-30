@@ -1,4 +1,4 @@
-import { checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput, generaDatiInquinamento } from '/javascripts/service/liveweatherService.js';
+import { checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput } from '/javascripts/service/liveweatherService.js';
 import { spawnIntro } from '/javascripts/controllers/paginaIntroController.js';
 import { spawnPaginaLuogo } from '/javascripts/controllers/paginaLuogoController.js';
 import { spawnPaginaGiorno } from '/javascripts/controllers/paginaGiornoController.js';
@@ -66,8 +66,15 @@ async function cambiaScenaAvanti() {
       localStorage.setItem('lastcity', cittàselezionata)
       //In caso tornasse indietro l'utente
       cittàprecedente = cittàselezionata
+
       //Ottengo dati inquinamento attuali, utilizzabili solo se l'utente richiede meteo per il giorno stesso
-      datiInquinamento = await generaDatiInquinamento(lon, lat)
+      //Implementata questa richiesta tramite WebWorker
+      var liveweatherWorker = new Worker("/javascripts/workers/liveweatherWorker.js")
+      liveweatherWorker.postMessage([lon, lat])
+      liveweatherWorker.onmessage = function (msg) {
+        datiInquinamento = msg.data['list'][0]
+      }
+      
       //Filtro i giorni disponibili
       giorni = filtraGiorni(datiMeteo5Giorni['list'], timezone)
       //Cambio dinamico del div

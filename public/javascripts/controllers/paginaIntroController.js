@@ -16,11 +16,10 @@ async function spawnIntro() {
         + "I dati sono disponibili grazie alla piattaforma <a href=\"https://openweathermap.org/api\">"
         + "OpenWeatherAPI</a> e <a href=\"https://openweathermap.org/api/air-pollution\">AQI</a>"
 
-        //Appendo l'intro ed il meteoattuale al dynamicdiv
+    //Appendo l'intro ed il meteoattuale al dynamicdiv
     dynamicdiv.appendChild(pIntro)
     dynamicdiv.appendChild(meteoattualediv)
     dynamicdiv.appendChild(imgMeteoAttuale)
-
 
     //Ottengo posizione attuale
     navigator.geolocation.getCurrentPosition(async (data) => {

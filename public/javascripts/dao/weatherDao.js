@@ -19,12 +19,6 @@ async function fetchWeatherCurrentLocation(lon, lat) {
     .catch(() => alert("Errore di connessione"))
 }
 
-async function fetchAirPollution(lon, lat) {
-    return await fetch('http://api.openweathermap.org/data/2.5/air_pollution?lat='+lat+'&lon='+lon+'&appid='+apikey)
-    .then(handleResponse)
-    .catch(() => alert("Errore di connessione"))
-}
-
 async function fetchCityNames() {
     return await fetch('/assets/cities.txt')
     .then(response => {
@@ -38,4 +32,4 @@ async function fetchCityNames() {
 
 
 
-export {fetchWeather5DaysEvery3Hours, fetchWeatherCurrentLocation, fetchAirPollution, fetchCityNames}
+export {fetchWeather5DaysEvery3Hours, fetchWeatherCurrentLocation, fetchCityNames}

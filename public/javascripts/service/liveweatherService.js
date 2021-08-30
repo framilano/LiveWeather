@@ -1,4 +1,4 @@
-import { fetchWeather5DaysEvery3Hours, fetchAirPollution, fetchWeatherCurrentLocation } from '/javascripts/dao/weatherDao.js';
+import { fetchWeather5DaysEvery3Hours, fetchWeatherCurrentLocation } from '/javascripts/dao/weatherDao.js';
 
 var cittàAttuale = null
 var orarioselezionato = null
@@ -16,7 +16,7 @@ function filtraGiorni(data5daysList, timezone) {
       current = day
     }
   });
-  return dates
+  return dates;
 }
 
 async function checkPaginaLuogoInput(cityname) {
@@ -60,16 +60,13 @@ function checkInputOrario(orariRadio, giornoselezionato, data5days, timezone) {
   return datiMeteo
 }
 
-async function generaDatiInquinamento(lon, lat) {
-  var datiInquinamento = await fetchAirPollution(lon, lat)
-  return datiInquinamento['list'][0]
-}
-
 async function recuperaMeteoLocale(data) {
   var datiMeteoAttuali = await fetchWeatherCurrentLocation(data['coords']['longitude'], data['coords']['latitude'])
   cittàAttuale = datiMeteoAttuali['name']
   return datiMeteoAttuali
 }
 
-export { checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput,
-   checkInputOrario, generaDatiInquinamento, recuperaMeteoLocale, cittàAttuale, orarioselezionato }
+export {
+  checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput,
+  checkInputOrario, recuperaMeteoLocale, cittàAttuale, orarioselezionato
+}
