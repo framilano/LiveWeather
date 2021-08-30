@@ -1,4 +1,4 @@
-import { retrieveLocalWeather } from '/javascripts/service/liveweatherService.js';
+import { recuperaMeteoLocale } from '/javascripts/service/liveweatherService.js';
 
 
 async function spawnIntro() {
@@ -24,7 +24,7 @@ async function spawnIntro() {
 
     //Ottengo posizione attuale
     navigator.geolocation.getCurrentPosition(async (data) => {
-        var datiMeteoAttuali = await retrieveLocalWeather(data)
+        var datiMeteoAttuali = await recuperaMeteoLocale(data)
         var descrizione = datiMeteoAttuali['weather'][0]['description']
 
         //Estraggo descrizione del meteo

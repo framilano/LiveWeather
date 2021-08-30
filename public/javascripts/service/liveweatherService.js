@@ -65,11 +65,11 @@ async function generaDatiInquinamento(lon, lat) {
   return datiInquinamento['list'][0]
 }
 
-async function retrieveLocalWeather(data) {
+async function recuperaMeteoLocale(data) {
   var datiMeteoAttuali = await fetchWeatherCurrentLocation(data['coords']['longitude'], data['coords']['latitude'])
   cittàAttuale = datiMeteoAttuali['name']
   return datiMeteoAttuali
 }
 
 export { checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput,
-   checkInputOrario, generaDatiInquinamento, retrieveLocalWeather, cittàAttuale, orarioselezionato }
+   checkInputOrario, generaDatiInquinamento, recuperaMeteoLocale, cittàAttuale, orarioselezionato }

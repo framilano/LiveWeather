@@ -23,28 +23,31 @@ async function spawnPaginaLuogo(cittàprecedente) {
   document.getElementById("cityprompt").focus();
   document.getElementById("cityprompt").select();
 
-  var p = document.createElement("p");
+  var pPrecedente = document.createElement("p");
+  var pAttuale = document.createElement("p");
 
   //Aggiungo bottone dell'ultima ricerca effettuata
   if (cittàprecedente != null) {
     var buttonLastCity = document.createElement("button");
-    p.innerText = "Hai cercato recentemente: ";
+    pPrecedente.innerText = "L'ultima città ricercata è stata ";
     buttonLastCity.innerText = cittàprecedente;
     buttonLastCity.setAttribute("onclick",
-      "document.getElementById('cityprompt').value=" + '"' + cittàprecedente + '"');
-    p.appendChild(buttonLastCity);
+    "document.getElementById('cityprompt').value=" + '"' + cittàprecedente + '"');
+    pPrecedente.appendChild(buttonLastCity);
+    dynamicdiv.appendChild(pPrecedente);
   }
 
   //Aggiungo bottone della posizione attuale
   if (cittàAttuale != null) {
     var buttonCittàAttuale = document.createElement("button");
+    pAttuale.innerText = "Oppure inserisci direttamente la tua "
     buttonCittàAttuale.innerText = "Posizione attuale"
     buttonCittàAttuale.setAttribute("onclick",
       "document.getElementById('cityprompt').value=" + '"' + cittàAttuale + '"');
-    p.appendChild(buttonCittàAttuale)
+    pAttuale.appendChild(buttonCittàAttuale)
+    dynamicdiv.appendChild(pAttuale)
   }
 
-  dynamicdiv.appendChild(p);
 
   //Prendo il content per aggiungere il fading
   var content = document.getElementById('content')
