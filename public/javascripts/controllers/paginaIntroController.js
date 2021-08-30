@@ -13,8 +13,8 @@ async function spawnIntro() {
 
     //Descrizione introduttiva
     pIntro.innerHTML = "LiveWeather è un servizio meteo gratuito globale per i prossimi 5 giorni<br>"
-        + "I dati sono disponibili grazie alla piattaforma <a href=\"https://openweathermap.org/api\">"
-        + "OpenWeatherAPI</a> e <a href=\"https://openweathermap.org/api/air-pollution\">AQI</a>"
+        + "I dati sono disponibili grazie alla piattaforma <a href=\"https://openweathermap.org/api\" target=\"_blank\">"
+        + "OpenWeatherAPI</a> e <a href=\"https://aqicn.org/api/\" target=\"_blank\">AQI</a>"
 
     //Appendo l'intro ed il meteoattuale al dynamicdiv
     dynamicdiv.appendChild(pIntro)
