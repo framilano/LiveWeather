@@ -1,5 +1,10 @@
 # LiveWeather
 Global weather service based on NodeJS with OpenWeatherAPI and AQI
 
+![Webpage screenshot](https://i.imgur.com/6Qym0y0.png)
+
 ## ToDo List
-* Implementing Web Workers
+* ~~Implementing Web Workers~~
+* ~~Adding CSS fading effect~~
+* ~~Adding Air Pollution info~~
+* ~~Adding Light Theme~~
