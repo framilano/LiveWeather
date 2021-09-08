@@ -1,8 +1,10 @@
-import { checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput, richiestaDatiInquinamento } from '/javascripts/service/liveweatherService.js';
+import { checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput } from '/javascripts/service/liveweatherService.js';
 import { spawnIntro } from '/javascripts/controllers/paginaIntroController.js';
 import { spawnPaginaLuogo } from '/javascripts/controllers/paginaLuogoController.js';
 import { spawnPaginaGiorno } from '/javascripts/controllers/paginaGiornoController.js';
 import { spawnOrarioInput } from '/javascripts/controllers/paginaRisultatoController.js';
+import { requestApiKey  } from '../model/weatherAPI.js';
+import { api_key } from '/javascripts/model/weatherAPI.js'
 
 //Listener per bottoni di avanti e indietro e tasto invio
 document.getElementById('submitbtnforward').addEventListener('click', cambiaScenaAvanti)
@@ -35,7 +37,13 @@ var orari
 var datiInquinamento
 //Classe attualmente utilizzata dal dynamicdiv
 var attuale
+//Salvo la data attuale in una stringa
+var label_giornata
 
+/**
+ * Risponde al bottono avanti nella pagina principale
+ * controllando con uno switch i vari casi in base a che sezione stiamo utilizzando
+**/
 async function cambiaScenaAvanti() {
   attuale = document.getElementsByClassName('dynamicdiv')[0]
   switch (attuale.getAttribute('id')) {
@@ -45,13 +53,18 @@ async function cambiaScenaAvanti() {
 
       //Cambio dinamico del div
       attuale.setAttribute('id', 'paginaluogo')
+
+      //Richiedo lo spawn dell'input Luogo
       spawnPaginaLuogo(cittàprecedente)
+
+      //Appare il tasto per tornare indietro
       document.getElementById('submitbtnback').hidden = 0
       break
 
     case "paginaluogo":
       //Ottengo dizionario con info per i prossimi 5 giorni
       datiMeteo5Giorni = await checkPaginaLuogoInput(document.getElementById('cityprompt').value)
+
       //Controllo se la request ha restituito un risultato nullo
       if (datiMeteo5Giorni == null) {
         document.getElementById('cityprompt').style.border = "3px solid red"
@@ -64,15 +77,27 @@ async function cambiaScenaAvanti() {
       lat = datiMeteo5Giorni['city']['coord']['lat']
       timezone = datiMeteo5Giorni['city']['timezone']
       localStorage.setItem('lastcity', cittàselezionata)
+
       //In caso tornasse indietro l'utente
       cittàprecedente = cittàselezionata
 
-      datiInquinamento  = richiestaDatiInquinamento(lon, lat)
-      
+      //Ottengo dati inquinamento attuali, utilizzabili solo se l'utente richiede meteo per il giorno stesso
+      //Implementata questa richiesta tramite WebWorker
+      var liveweatherWorker = new Worker("/javascripts/model/workers/liveweatherWorker.js")
+      console.log("Posted lon, lat and api_key to WebWorker")
+      liveweatherWorker.postMessage([lon, lat, api_key['api_key']])
+      liveweatherWorker.onmessage = function (msg) {
+        console.log("Received air pollution data from WebWorker")
+        datiInquinamento = msg.data['list'][0]
+      }
+
       //Filtro i giorni disponibili
       giorni = filtraGiorni(datiMeteo5Giorni['list'], timezone)
+
       //Cambio dinamico del div
       attuale.setAttribute('id', 'paginagiorno')
+
+      //Richiedo lo spawn dell'input Giorno
       spawnPaginaGiorno(giorni)
       break;
 
@@ -86,24 +111,48 @@ async function cambiaScenaAvanti() {
       }
       //Salvo il giorno selezionato estraendolo dai radio
       document.getElementsByName('giornoprompt').forEach(element => {
-        if (element.checked) giornoselezionato = element.value.split("/")[0]
+        if (element.checked) {
+          giornoselezionato = element.value.split("/")[0]
+          return
+        }
       })
+
+      //Necessario Array.from poichè getElementsByTagName restituisce una HTMLCollection (che non è un array)
+      //forEach funziona solo con gli array
+      Array.from(document.getElementsByTagName('label')).forEach(element => {
+        if (element.getAttribute('for') == giornoselezionato) {
+          label_giornata = element.innerHTML
+        }
+      })
+
       //Cambio dinamico del div
       attuale.setAttribute('id', 'paginarisultato')
+
+      //Scompare il tasto avanti
       document.getElementById('submitbtnforward').hidden = 1
       document.getElementById('content').style.marginTop = "0%"
+
+      //Richiedo lo spawn dei vari orari da cui scegliere insieme alle tabelle meteo e inquinamento, (mando solo il giorno senza il mese)
       spawnOrarioInput(orari, giornoselezionato, datiMeteo5Giorni, datiInquinamento, timezone)
       break;
   }
 }
 
+/**
+ * Risponde al bottono indietro nella pagina principale
+ * controllando con uno switch i vari casi in base a che sezione stiamo utilizzando
+**/
 function cambiaScenaIndietro() {
   attuale = document.getElementsByClassName('dynamicdiv')[0]
   switch (attuale.getAttribute('id')) {
     case "paginaluogo":
       //Cambio dinamico del div
       attuale.setAttribute('id', 'intro')
+
+      //Torno indietro alla pagina iniziale
       spawnIntro()
+
+      //Scompare il tasto indietro
       document.getElementById('submitbtnback').hidden = 1
       document.getElementById('content').style.marginTop = "7%"
       break;
@@ -111,19 +160,29 @@ function cambiaScenaIndietro() {
     case "paginagiorno":
       //Cambio dinamico del div
       attuale.setAttribute('id', 'paginaluogo')
+
+      //Torno indietro nella pagina luogo
       spawnPaginaLuogo(cittàprecedente)
       break;
 
     case "paginarisultato":
       //Cambio dinamico del div
       attuale.setAttribute('id', 'paginagiorno')
+
+      //Torno indietro nella pagina di selezione del giorno
       spawnPaginaGiorno(giorni)
+
+      //Riappare il tasto avanti
       document.getElementById('submitbtnforward').hidden = 0
       document.getElementById('content').style.marginTop = "7%"
       break
   }
 }
 
+//Richiedo 
+await requestApiKey()
+//Funzione iniziale appena caricato liveweather.ejs dalle views
 spawnIntro()
 
-export { cittàselezionata }
+
+export { cittàselezionata, label_giornata }

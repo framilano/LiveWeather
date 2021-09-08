@@ -8,7 +8,6 @@ async function spawnPaginaLuogo(cittàprecedente) {
   //Creo il label e l'input cityprompt
   var label = document.createElement("label");
   var input = document.createElement("input");
-
   label.setAttribute("for", "cityprompt");
   label.innerHTML = "Inserisci nome città <br>";
   input.setAttribute("type", "text");
@@ -47,7 +46,6 @@ async function spawnPaginaLuogo(cittàprecedente) {
     pAttuale.appendChild(buttonCittàAttuale)
     dynamicdiv.appendChild(pAttuale)
   }
-
 
   //Prendo il content per aggiungere il fading
   var content = document.getElementById('content')

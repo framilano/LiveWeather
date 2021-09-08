@@ -9,36 +9,31 @@ h1 {
   text-align: center;
   font-size: 400%;
 }
- table {
-   width: 100%;
- }
+
+
+table {
+  width: 100%;
+  border: solid 5px #101010;
+  background-color: #121212;
+  border-radius: 20px;
+  border-spacing: 0;
+}
+
 
 th {
+  border-bottom: solid 5px #101010;
   padding-top: 1%;
   padding-bottom: 1%;
   width: 50%;
-  border: none;
-  background-color: #121212;
   font-size: 90%;
-  border-bottom-right-radius: 0%;
-  border-top-right-radius: 0%;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-
-
 }
 
 td {
+  border-bottom: solid 5px #101010;
   padding-top: 1%;
   padding-bottom: 1%;
   width: 50%;
-  border: none;
-  background-color: #121212;
   font-size: 90%;
-  border-bottom-right-radius: 20px;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 0%;
-  border-bottom-left-radius: 0%;
 }
 
 button {
@@ -46,8 +41,6 @@ button {
   border-radius: 4px;
   font-size: 100%;
 }
-
-
 
 #meteotable {
   margin-bottom: 2%;
@@ -103,7 +96,7 @@ button {
 }
 
 #themeswitch {
-  position: absolute;
+  position: fixed;
   right: 1%;
   background-color: Transparent;
   background-repeat: no-repeat;
@@ -114,9 +107,6 @@ button {
   font-size: 150%;
 }
 
-#descrizione {
-  margin-top: 0%;
-}
 
 #DivMappaContainer {
   height: 500px;
@@ -129,6 +119,7 @@ button {
   width: 100%;
 }
 
+
 .dynamicdiv {
   background-color: #181818;
   padding: 2%;
@@ -137,8 +128,8 @@ button {
   width: 75%;
   margin-left: auto;
   margin-right: auto;
-  border: none;
   border-radius: 20px;
+  border: solid 5px #101010;
 }
 
 .radio-toolbar input[type="radio"] {

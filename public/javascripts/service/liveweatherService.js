@@ -62,25 +62,13 @@ function checkOrarioInput(orariRadio, giornoselezionato, data5days, timezone) {
 
 //Prima funzione di servizio utilizzata, richiama la API KEY e richiede il meteo attuale sulla pagina intro
 async function recuperaMeteoLocale(data) {
-  await requestApiKey()
   var datiMeteoAttuali = await fetchWeatherCurrentLocation(data['coords']['longitude'], data['coords']['latitude'])
   cittàAttuale = datiMeteoAttuali['name']
   return datiMeteoAttuali
 }
 
-function richiestaDatiInquinamento(lon, lat) {
-  //Ottengo dati inquinamento attuali, utilizzabili solo se l'utente richiede meteo per il giorno stesso
-  //Implementata questa richiesta tramite WebWorker
-  var datiInquinamento = []
-  var liveweatherWorker = new Worker("/javascripts/model/workers/liveweatherWorker.js")
-  liveweatherWorker.postMessage([lon, lat, api_key['api_key']])
-  liveweatherWorker.onmessage = function (msg) {
-    datiInquinamento = msg.data['list'][0]
-  }
-  return datiInquinamento
-}
 
 export {
   checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput,
-  checkOrarioInput, recuperaMeteoLocale, richiestaDatiInquinamento, cittàAttuale, orarioselezionato
+  checkOrarioInput, recuperaMeteoLocale, cittàAttuale, orarioselezionato
 }

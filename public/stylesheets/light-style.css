@@ -1,51 +1,44 @@
 body {
   font-family: "Roboto", sans-serif;
   font-size: 150%;
+  background-color: white;
+  color: black;
 }
 
 h1 {
   text-align: center;
   font-size: 400%;
 }
- table {
-   width: 100%;
- }
 
-tr {
-  background-color: #BCBCBC;
+
+table {
+  width: 100%;
+  border: solid 5px #9a9a9a;
+  background-color: #CCCCCC;
+  border-radius: 20px;
+  border-spacing: 0;
 }
 
+
 th {
-  background-color: #BCBCBC;
+  border-bottom: solid 5px #9a9a9a;
   padding-top: 1%;
   padding-bottom: 1%;
   width: 50%;
-  border: none;
   font-size: 90%;
-  border-bottom-right-radius: 0%;
-  border-top-right-radius: 0%;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
 }
 
 td {
-  background-color: #BCBCBC;
+  border-bottom: solid 5px #9a9a9a;
   padding-top: 1%;
   padding-bottom: 1%;
   width: 50%;
-  border: none;
-
   font-size: 90%;
-  border-bottom-right-radius: 20px;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 0%;
-  border-bottom-left-radius: 0%;
 }
 
 button {
-  background-color: #DFDFDF;
   border: none;
-  border-radius: 20px;
+  border-radius: 4px;
   font-size: 100%;
 }
 
@@ -96,13 +89,12 @@ button {
   outline: none;
   text-align: center;
   font-size: 150%;
-  border-radius: 50px;
-  border: none;
+  border-radius: 4px;
   border: 3px solid #FFFFFF;
 }
 
 #themeswitch {
-  position: absolute;
+  position: fixed;
   right: 1%;
   background-color: Transparent;
   background-repeat: no-repeat;
@@ -123,24 +115,24 @@ button {
 }
 
 #DivMappa {
+  color: #000000;
   height: 500px;
   width: 100%;
 }
 
 .dynamicdiv {
-  background-color: #efefef;
+  background-color: #DDDDDD;
   padding: 2%;
   margin-bottom: 2%;
   text-align: center;
   width: 75%;
   margin-left: auto;
   margin-right: auto;
-  border: none;
   border-radius: 20px;
+  border: solid 5px #9a9a9a;
 }
 
 .radio-toolbar input[type="radio"] {
-  background-color: #DFDFDF;
   opacity: 0;
   position: fixed;
   width: 0;
@@ -148,23 +140,24 @@ button {
 
 .radio-toolbar label {
   display: inline-block;
+  background-color: #CCCCCC;
   padding: 10px 20px;
   font-family: sans-serif, Arial;
   font-size: 16px;
-  border: 2px solid #444;
+  border: 2px solid #9a9a9a;
   border-radius: 4px;
 }
 
 .radio-toolbar input[type="radio"]:checked + label {
-  background-color: #EFEFEF;
+  background-color: #AAAAAA;
 }
 
 .radio-toolbar input[type="radio"]:focus + label {
-  border: 2px dashed #444;
+  border: 2px dashed #9a9a9a;
 }
 
 .radio-toolbar label:hover {
-  background-color: #BCBCBC;
+  background-color: #8A8A8A;
 }
 
 .radio-toolbar label{
@@ -172,21 +165,10 @@ button {
 }
 
 @media only screen and (max-width: 768px) {
+
   h1 {
     text-align: center;
     font-size: 200%;
-  }
-  
-  input {
-    width: 100%;
-  }
-
-  th {
-    font-size: 75%;
-  }
-
-  td {
-    font-size: 75%;
   }
 
   .dynamicdiv {
@@ -204,4 +186,16 @@ button {
     width: 100%;
   }
 
+  input {
+    width: 100%;
+  }
+
+  th {
+    font-size: 75%;
+  }
+
+  td {
+    font-size: 75%;
+  }
 }
+

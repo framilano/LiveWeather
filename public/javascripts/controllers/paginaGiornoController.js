@@ -1,11 +1,16 @@
 var mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"]
 
 function spawnPaginaGiorno(giorni) {
+    //Svuoto il div dinamico
     var dynamicdiv = document.getElementsByClassName('dynamicdiv')[0]
     dynamicdiv.innerHTML = ""
+
+    //Creo un p per un label
     var p = document.createElement('p')
     p.innerText = "Seleziona il giorno per la ricerca"
     dynamicdiv.appendChild(p)
+
+    //Attributi per i radio
     var label
     var input
     var index = 0
@@ -19,17 +24,18 @@ function spawnPaginaGiorno(giorni) {
     //Appendo la toolbar radio al dynamic div
     dynamicdiv.appendChild(radiotoolbar)
 
+    //Creo i radio con i vari giorni al loro interno
     giorni.forEach(element => {
         giorno = element.split("-")[0]
         mese = element.split("-")[1]
         label = document.createElement('label')
         label.setAttribute('for', giorno)
-        label.innerHTML = giorno + " " + mesi[mese] + "<br>"
+        label.innerHTML = giorno + " " + mesi[mese]
         input = document.createElement('input')
         input.setAttribute('type', 'radio')
         input.setAttribute('name', 'giornoprompt')
         input.setAttribute('id', giorno)
-        input.setAttribute('value', giorno + "/" + (mese + 1))
+        input.setAttribute('value', giorno + "/" + (parseInt(mese) + 1))
         radiotoolbar.appendChild(input)
         radiotoolbar.appendChild(label)
         if (index == 0) {

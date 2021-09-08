@@ -1,6 +1,6 @@
 import { recuperaMeteoLocale } from '/javascripts/service/liveweatherService.js';
 
-
+//Spawn pagina iniziale
 async function spawnIntro() {
     var dynamicdiv = document.getElementsByClassName('dynamicdiv')[0]
     var pIntro = document.createElement('p')
@@ -20,7 +20,6 @@ async function spawnIntro() {
     dynamicdiv.appendChild(pIntro)
     dynamicdiv.appendChild(meteoattualediv)
     dynamicdiv.appendChild(imgMeteoAttuale)
-
     //Ottengo posizione attuale
     navigator.geolocation.getCurrentPosition(async (data) => {
         var datiMeteoAttuali = await recuperaMeteoLocale(data)
@@ -39,6 +38,7 @@ async function spawnIntro() {
         imgMeteoAttuale.setAttribute('src', "/images/WeatherPNGs/" + datiMeteoAttuali["weather"][0]["icon"] + ".png")
         imgMeteoAttuale.setAttribute("title", datiMeteoAttuali["weather"][0]["description"]);
 
+    //Gestisco l'assenza di permessi per la geolocalizzazione
     }, () => {
         pMeteo.innerText = "Non è possibile verificare la tua posizione attuale\nAssicurati di aver attivato la geolocalizzazione sul tuo Browser"
     })
@@ -48,6 +48,7 @@ async function spawnIntro() {
 
     //Prendo il content per aggiungere il fading
     var content = document.getElementById('content')
+    
     //Aggiungo effetto di fading in ingresso
     $(content).hide().fadeIn(1000);
 }

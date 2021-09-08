@@ -1,5 +1,7 @@
+//Listener al bottone di cambio tema
 document.getElementById('themeswitch').addEventListener('click', cambiaTema)
 
+//Richiesta di cambio tema, cambia lo stylesheet in base al tema attuale
 function cambiaTema() {
     savedtheme = localStorage.getItem("tema");
     switchbutton = document.getElementById('themeswitch');
@@ -18,6 +20,7 @@ function cambiaTema() {
     }
 }
 
+//Recupera da localstorage l'ultimo tema utilizzato, di default viene utilizzato il tema bianco
 function inizializzaTema() {
     switchbutton = document.getElementById('themeswitch');
     savedtheme = localStorage.getItem("tema");

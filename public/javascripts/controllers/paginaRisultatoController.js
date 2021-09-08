@@ -1,6 +1,7 @@
 import { spawnMappaMeteo } from "/javascripts/service/openlayerService.js";
 import { checkOrarioInput } from "/javascripts/service/liveweatherService.js";
-import { cittàselezionata } from "/javascripts/controllers/liveweatherController.js";
+import { cittàselezionata, label_giornata } from "/javascripts/controllers/liveweatherController.js";
+
 
 var attributiMeteo = {
     "Temperatura 🌡️": "temp",
@@ -18,7 +19,7 @@ var attributiMeteo = {
 };
 
 var attributiInquinamento = {
-    "Indice qualità dell'aria 🌿": "aqi",
+    "Indice qualità dell'aria (AQI) 🌿": "aqi",
     "Concentrazione di monossido di carbonio (CO)": "co",
     "Concentrazione di monossido di nitrogeno (NO)": "no",
     "Concentrazione di diossido di nitrogeno (NO2)": "no2",
@@ -40,7 +41,7 @@ async function spawnOrarioInput(orari, giornoselezionato, datiMeteo5Giorni, dati
 
     //Creo label per gli orari
     var p = document.createElement("p");
-    p.innerText = "Seleziona la fascia oraria per la ricerca";
+    p.innerText = "Tutti gli orari visualizzati sono locali rispetto al luogo scelto.\nSeleziona la fascia oraria per la ricerca";
     dynamicdiv.appendChild(p);
     var label;
     var input;
@@ -84,20 +85,27 @@ async function spawnOrarioInput(orari, giornoselezionato, datiMeteo5Giorni, dati
     //Appendo il resultdiv al dynamicdiv principale
     dynamicdiv.appendChild(resultdiv);
 
-    //Genero la sezione risultato
+
+    //Chiamo lo strato di servizio per ottenere idati meteo per il radio orario selezionato
     var datiMeteo = checkOrarioInput(orariRadio, giornoselezionato, datiMeteo5Giorni, timezone);
     spawnSezioneRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone);
 
     //Aggiungo Listener per i radio appena creati
     aggiungiRadioListener(orariRadio, datiMeteo, giornoselezionato, datiMeteo5Giorni, timezone, datiInquinamento);
 
-
+    var content = document.getElementById('content')
+    //Aggiungo effetto di fading in ingresso
+    $(content).hide().fadeIn(1000);
 }
 
-//Aggiungo dei listener sui radio button dell'orario
+/**
+ * Aggiungo dei listener sui radio button dell'orario in modo da aggiornare
+ * dinamicamente la pagina in base all'input dell'orario
+**/
 function aggiungiRadioListener(orariRadio, datiMeteo, giornoselezionato, datiMeteo5Giorni, timezone, datiInquinamento) {
     orariRadio.forEach((element) => {
         element.addEventListener("click", () => {
+            //Chiamo lo strato di servizio per ottenere i nuovi dati meteo per il radio orario appena cliccato
             datiMeteo = checkOrarioInput(orariRadio, giornoselezionato, datiMeteo5Giorni, timezone);
             spawnSezioneRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone);
         });
@@ -141,10 +149,10 @@ function spawnTabellaMeteo(datiMeteo) {
     img.setAttribute("src", "/images/WeatherPNGs/" + datiMeteo["weather"][0]["icon"] + ".png");
     img.setAttribute("title", datiMeteo["weather"][0]["description"]);
     var descriptionP = document.createElement("p");
-    descriptionP.setAttribute("id", "descrizione");
     descriptionP.innerHTML =
-        "Condizioni meteo: " + datiMeteo["weather"][0]["description"] + "<br><br>" +
-        "Stai visualizzando le condizioni meteo di \n" + cittàselezionata
+    "Condizioni meteo: " + datiMeteo["weather"][0]["description"] + "<br><br>" +
+    "Stai visualizzando le condizioni meteo di " + cittàselezionata +
+    " per il giorno " + label_giornata
     resultdiv.appendChild(img);
     resultdiv.appendChild(descriptionP);
 
@@ -165,10 +173,16 @@ function spawnTabellaMeteo(datiMeteo) {
         table.appendChild(tr);
     }
     resultdiv.appendChild(table);
+
+    //Aggiungo effetto di fading in ingresso
+    $(table).hide().fadeIn(1000);
 }
 //Spawn della tabella inquinamento
 function spawnTabellaInquinamento() {
     var resultdiv = document.getElementsByClassName("resultdiv")[0];
+    var descriptionP = document.createElement("p");
+    descriptionP.innerHTML = "Stai visualizzando le informazioni sulla qualità dell'aria <br>"+
+    "Per maggiori informazioni <a href=\"https://www.airnow.gov/aqi/aqi-basics/\" target=\"_blank\">AQI basics</a>"
     var table = document.createElement("table");
     table.setAttribute("id", "inquinamentotable");
     var tr;
@@ -184,7 +198,11 @@ function spawnTabellaInquinamento() {
         tr.appendChild(td);
         table.appendChild(tr);
     }
+    resultdiv.appendChild(descriptionP)
     resultdiv.appendChild(table);
+
+    //Aggiungo effetto di fading in ingresso
+    $(table).hide().fadeIn(1000);
 }
 
 //Riempio la tabella Meteo con i dati ottenuti da fetch
@@ -194,7 +212,7 @@ function riempiTabellaMeteo(datiMeteo, datiMeteo5Giorni, timezone) {
     document.getElementById("max").innerText = (parseFloat(datiMeteo["main"]["temp_max"])).toFixed(1).toString() + "°C";
     document.getElementById("min").innerText = (parseFloat(datiMeteo["main"]["temp_min"])).toFixed(1).toString() + "°C";
     document.getElementById("pop").innerText = (parseFloat(datiMeteo["pop"]) * 100).toFixed(1).toString() + "%"
-    if (datiMeteo["rain"] == undefined) document.getElementById("rain").innerText = "🤷‍♂";
+    if (datiMeteo["rain"] == undefined) document.getElementById("rain").innerText = "Non disponibile";
     else document.getElementById("rain").innerHTML = datiMeteo["rain"]['3h'] + " mm<sup>3</sup>";
     document.getElementById("press").innerText = datiMeteo["main"]["pressure"] + " hPa";
     document.getElementById("umid").innerText = datiMeteo["main"]["humidity"] + "%";
