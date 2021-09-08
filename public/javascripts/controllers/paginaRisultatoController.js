@@ -1,5 +1,5 @@
 import { spawnMappaMeteo } from "/javascripts/service/openlayerService.js";
-import { checkInputOrario } from "/javascripts/service/liveweatherService.js";
+import { checkOrarioInput } from "/javascripts/service/liveweatherService.js";
 import { cittàselezionata } from "/javascripts/controllers/liveweatherController.js";
 
 var attributiMeteo = {
@@ -30,7 +30,7 @@ var attributiInquinamento = {
 };
 
 //Spawn dei radio per la selezione dell'orario
-async function spawnInputOrario(orari, giornoselezionato, datiMeteo5Giorni, datiInquinamento, timezone) {
+async function spawnOrarioInput(orari, giornoselezionato, datiMeteo5Giorni, datiInquinamento, timezone) {
     //Creo la sezione di result con tabelle e mappa, le appendo al div dinamico
     var dynamicdiv = document.getElementsByClassName("dynamicdiv")[0];
     dynamicdiv.innerHTML = "";
@@ -85,7 +85,7 @@ async function spawnInputOrario(orari, giornoselezionato, datiMeteo5Giorni, dati
     dynamicdiv.appendChild(resultdiv);
 
     //Genero la sezione risultato
-    var datiMeteo = checkInputOrario(orariRadio, giornoselezionato, datiMeteo5Giorni, timezone);
+    var datiMeteo = checkOrarioInput(orariRadio, giornoselezionato, datiMeteo5Giorni, timezone);
     spawnSezioneRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone);
 
     //Aggiungo Listener per i radio appena creati
@@ -98,7 +98,7 @@ async function spawnInputOrario(orari, giornoselezionato, datiMeteo5Giorni, dati
 function aggiungiRadioListener(orariRadio, datiMeteo, giornoselezionato, datiMeteo5Giorni, timezone, datiInquinamento) {
     orariRadio.forEach((element) => {
         element.addEventListener("click", () => {
-            datiMeteo = checkInputOrario(orariRadio, giornoselezionato, datiMeteo5Giorni, timezone);
+            datiMeteo = checkOrarioInput(orariRadio, giornoselezionato, datiMeteo5Giorni, timezone);
             spawnSezioneRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone);
         });
     });
@@ -225,4 +225,4 @@ function riempiTabellaInquinamento(datiInquinamento) {
     document.getElementById("nh3").innerHTML = datiInquinamento["components"]["nh3"] + " μg/m<sup>3</sup>";
 }
 
-export { spawnInputOrario };
+export { spawnOrarioInput };

@@ -1,8 +1,8 @@
-import { checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput } from '/javascripts/service/liveweatherService.js';
+import { checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput, richiestaDatiInquinamento } from '/javascripts/service/liveweatherService.js';
 import { spawnIntro } from '/javascripts/controllers/paginaIntroController.js';
 import { spawnPaginaLuogo } from '/javascripts/controllers/paginaLuogoController.js';
 import { spawnPaginaGiorno } from '/javascripts/controllers/paginaGiornoController.js';
-import { spawnInputOrario } from '/javascripts/controllers/paginaRisultatoController.js';
+import { spawnOrarioInput } from '/javascripts/controllers/paginaRisultatoController.js';
 
 //Listener per bottoni di avanti e indietro e tasto invio
 document.getElementById('submitbtnforward').addEventListener('click', cambiaScenaAvanti)
@@ -67,13 +67,7 @@ async function cambiaScenaAvanti() {
       //In caso tornasse indietro l'utente
       cittàprecedente = cittàselezionata
 
-      //Ottengo dati inquinamento attuali, utilizzabili solo se l'utente richiede meteo per il giorno stesso
-      //Implementata questa richiesta tramite WebWorker
-      var liveweatherWorker = new Worker("/javascripts/workers/liveweatherWorker.js")
-      liveweatherWorker.postMessage([lon, lat])
-      liveweatherWorker.onmessage = function (msg) {
-        datiInquinamento = msg.data['list'][0]
-      }
+      datiInquinamento  = richiestaDatiInquinamento(lon, lat)
       
       //Filtro i giorni disponibili
       giorni = filtraGiorni(datiMeteo5Giorni['list'], timezone)
@@ -98,7 +92,7 @@ async function cambiaScenaAvanti() {
       attuale.setAttribute('id', 'paginarisultato')
       document.getElementById('submitbtnforward').hidden = 1
       document.getElementById('content').style.marginTop = "0%"
-      spawnInputOrario(orari, giornoselezionato, datiMeteo5Giorni, datiInquinamento, timezone)
+      spawnOrarioInput(orari, giornoselezionato, datiMeteo5Giorni, datiInquinamento, timezone)
       break;
   }
 }

@@ -6,7 +6,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var liveweatherRouter = require('./routes/liveweather.js');
-
+var apikeyRouter = require('./routes/apikey.js');
+var dotenv = require('dotenv')
+dotenv.config()
 var app = express().use('*', cors());
 
 // view engine setup
@@ -22,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Routes
 app.use('/', indexRouter);
 app.use('/liveweather', liveweatherRouter);
+app.use('/requestapikey', apikeyRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
