@@ -153,8 +153,7 @@ function spawnTabellaMeteo(datiMeteo) {
     "Condizioni meteo: " + datiMeteo["weather"][0]["description"] + "<br><br>" +
     "Stai visualizzando le condizioni meteo di " + cittàselezionata +
     " per il giorno " + label_giornata
-    resultdiv.appendChild(img);
-    resultdiv.appendChild(descriptionP);
+    
 
     //Creo la tabella con i dettagli meteo
     var table = document.createElement("table");
@@ -172,6 +171,14 @@ function spawnTabellaMeteo(datiMeteo) {
         tr.appendChild(td);
         table.appendChild(tr);
     }
+    
+    //Rimuovo il bordo inferiore dell'ultimo th e td, per evitare overlapping
+    th.style.borderBottom = 0
+    td.style.borderBottom = 0
+
+    //Appendo immagine, descrizione e tabella meteo
+    resultdiv.appendChild(img);
+    resultdiv.appendChild(descriptionP);
     resultdiv.appendChild(table);
 
     //Aggiungo effetto di fading in ingresso
@@ -198,6 +205,12 @@ function spawnTabellaInquinamento() {
         tr.appendChild(td);
         table.appendChild(tr);
     }
+
+    //Rimuovo il bordo inferiore dell'ultimo th e td, per evitare overlapping
+    th.style.borderBottom = 0
+    td.style.borderBottom = 0
+
+    //Appendo descrizione e tabella dell'inquinamento
     resultdiv.appendChild(descriptionP)
     resultdiv.appendChild(table);
 

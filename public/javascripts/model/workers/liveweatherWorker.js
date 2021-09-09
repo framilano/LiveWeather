@@ -1,3 +1,4 @@
+//Worker che recupera in background le informazioni sui dati ambientali
 onmessage = async function (msg) {
     console.log("Received lon, lat and api_key from main script")
     var lon = msg.data[0]

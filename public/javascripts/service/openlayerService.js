@@ -5,11 +5,13 @@ var feature
 var vectorLayer
 var controls
 
+//Distrugge un pop-up alla chiusura
 function destroyPopup(feature) {
     feature.popup.destroy();
     feature.popup = null;
 }
 
+//Creazione di un pop-up
 function createPopup(feature) {
     feature.popup = new OpenLayers.Popup.FramedCloud("pop",
         feature.geometry.getBounds().getCenterLonLat(),
@@ -23,6 +25,7 @@ function createPopup(feature) {
     map.addPopup(feature.popup);
 }
 
+//Aggiunge un punto di riferimento sulla mappa
 function addFeature(lon, lat, descrizione, iconpath) {
     // Define markers as "features" of the vector layer:
     feature = new OpenLayers.Feature.Vector(
@@ -36,6 +39,7 @@ function addFeature(lon, lat, descrizione, iconpath) {
     map.addLayer(vectorLayer);
 }
 
+//Creazione della mappa nella pagina risultato
 function spawnMappaMeteo(lon, lat, descrizione, iconpath) {
     map = new OpenLayers.Map("DivMappa", {interactions: [], controls: []});
     map.addLayer(new OpenLayers.Layer.OSM());

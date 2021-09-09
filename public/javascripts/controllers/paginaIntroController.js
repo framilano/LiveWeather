@@ -12,8 +12,8 @@ async function spawnIntro() {
     dynamicdiv.innerHTML = ""
 
     //Descrizione introduttiva
-    pIntro.innerHTML = "LiveWeather è un servizio meteo gratuito globale per i prossimi 5 giorni<br>"
-        + "I dati sono disponibili grazie alla piattaforma <a href=\"https://openweathermap.org/api\" target=\"_blank\">"
+    pIntro.innerHTML = "LiveWeather è un servizio meteo gratuito globale  con previsioni per i prossimi 5 giorni<br>"
+        + "I dati sono resi disponibili grazie alla piattaforma <a href=\"https://openweathermap.org/api\" target=\"_blank\">"
         + "OpenWeatherAPI</a> e <a href=\"https://aqicn.org/api/\" target=\"_blank\">AQI</a>"
 
     //Appendo l'intro ed il meteoattuale al dynamicdiv
@@ -32,7 +32,7 @@ async function spawnIntro() {
 
         //Aggiungo una breve descrizione del meteo
         pMeteo.innerText = "In questo momento a " + datiMeteoAttuali['name'] + " la temperatura è " +
-            "di " + datiMeteoAttuali['main']['temp'] + " gradi.\n\n" + descrizione
+            "di " + datiMeteoAttuali['main']['temp'] + "°C.\n\n" + descrizione
 
         //Aggiungo un'immagine meteo
         imgMeteoAttuale.setAttribute('src', "/images/WeatherPNGs/" + datiMeteoAttuali["weather"][0]["icon"] + ".png")

@@ -3,6 +3,7 @@ import { fetchWeather5DaysEvery3Hours, fetchWeatherCurrentLocation, requestApiKe
 var cittàAttuale = null
 var orarioselezionato = null
 
+//Recuperati i dati meteo per i prossimi 5 giorni, restituisce una lista dei giorni resi a disposizione
 function filtraGiorni(data5daysList, timezone) {
   var dates = []
   var current = ""
@@ -19,11 +20,13 @@ function filtraGiorni(data5daysList, timezone) {
   return dates;
 }
 
+//Controlla se la città inserita è valida per una query
 async function checkPaginaLuogoInput(cityname) {
   var data5days = await fetchWeather5DaysEvery3Hours(cityname)
   return data5days
 }
 
+//Restituisce gli orari disponibili per il giorno selezionato dall'utente
 function checkPaginaGiornoInput(giorniRadio, data5days, timezone) {
   var giornoselezionato = []
   giorniRadio.forEach(element => {
@@ -45,6 +48,7 @@ function checkPaginaGiornoInput(giorniRadio, data5days, timezone) {
   return orari
 }
 
+//Estrae dalla lista dei dati meteo dei prossimi 5 giorni solo i dati rilevanti per la data selezionata dall'utente
 function checkOrarioInput(orariRadio, giornoselezionato, data5days, timezone) {
   orariRadio.forEach(element => {
     if (element.checked) orarioselezionato = element.value.split("-")[1]
