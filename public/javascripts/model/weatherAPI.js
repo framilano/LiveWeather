@@ -8,6 +8,13 @@ function handleResponse(response) {
     return response.json();
 }
 
+//Recupera i dati meteo per la posizione attuale
+async function fetchWeatherCurrentLocation(lon, lat) {
+    return await fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=metric&lang=it&appid=' + api_key['api_key'])
+    .then(handleResponse)
+    .catch(() => alert("Errore di connessione"))
+}
+
 //Recupera i dati meteo per i prossimi 5 giorni in intervalli di 3 ore
 async function fetchWeather5DaysEvery3Hours(city) {
     return await fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&units=metric&lang=it&appid=' + api_key['api_key'])
@@ -15,12 +22,6 @@ async function fetchWeather5DaysEvery3Hours(city) {
         .catch(() => alert("Errore di connessione"))
 }
 
-//Recupera i dati meteo per la posizione attuale
-async function fetchWeatherCurrentLocation(lon, lat) {
-    return await fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=metric&lang=it&appid=' + api_key['api_key'])
-        .then(handleResponse)
-        .catch(() => alert("Errore di connessione"))
-}
 
 //Recupera la chiave API di OpenWeather dal back-end tramite una fetch, in modo tale da non esporla al client (Github ringrazia)
 async function requestApiKey() {
