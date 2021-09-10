@@ -2,9 +2,10 @@ import { checkPaginaLuogoInput, filtraGiorni, checkPaginaGiornoInput } from '/ja
 import { spawnIntro } from '/javascripts/controllers/paginaIntroController.js';
 import { spawnPaginaLuogo } from '/javascripts/controllers/paginaLuogoController.js';
 import { spawnPaginaGiorno } from '/javascripts/controllers/paginaGiornoController.js';
-import { spawnOrarioInput } from '/javascripts/controllers/paginaRisultatoController.js';
+import { spawnPaginaRisultato } from '/javascripts/controllers/paginaRisultatoController.js';
 import { requestApiKey  } from '../model/weatherAPI.js';
 import { api_key } from '/javascripts/model/weatherAPI.js'
+import { spawnPaginaRisultato } from './paginaRisultatoController.js';
 
 //Listener per bottoni di avanti e indietro e tasto invio
 document.getElementById('submitbtnforward').addEventListener('click', cambiaScenaAvanti)
@@ -133,7 +134,7 @@ async function cambiaScenaAvanti() {
       document.getElementById('content').style.marginTop = "0%"
 
       //Richiedo lo spawn dei vari orari da cui scegliere insieme alle tabelle meteo e inquinamento, (mando solo il giorno senza il mese)
-      spawnOrarioInput(orari, giornoselezionato, datiMeteo5Giorni, datiInquinamento, timezone)
+      spawnPaginaRisultato(orari, giornoselezionato, datiMeteo5Giorni, datiInquinamento, timezone)
       break;
   }
 }

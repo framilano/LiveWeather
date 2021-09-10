@@ -30,8 +30,22 @@ var attributiInquinamento = {
     "Concentrazione di ammoniaca (NH3)": "nh3",
 };
 
+/**
+ * Aggiungo dei listener sui radio button dell'orario in modo da aggiornare
+ * dinamicamente la pagina in base all'input dell'orario
+**/
+function aggiungiRadioListener(orariRadio, datiMeteo, giornoselezionato, datiMeteo5Giorni, timezone, datiInquinamento) {
+    orariRadio.forEach((element) => {
+        element.addEventListener("click", () => {
+            //Chiamo lo strato di servizio per ottenere i nuovi dati meteo per il radio orario appena cliccato
+            datiMeteo = checkOrarioInput(orariRadio, giornoselezionato, datiMeteo5Giorni, timezone);
+            spawnTabelleRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone);
+        });
+    });
+}
+
 //Spawn dei radio per la selezione dell'orario
-async function spawnOrarioInput(orari, giornoselezionato, datiMeteo5Giorni, datiInquinamento, timezone) {
+async function spawnPaginaRisultato(orari, giornoselezionato, datiMeteo5Giorni, datiInquinamento, timezone) {
     //Creo la sezione di result con tabelle e mappa, le appendo al div dinamico
     var dynamicdiv = document.getElementsByClassName("dynamicdiv")[0];
     dynamicdiv.innerHTML = "";
@@ -88,7 +102,7 @@ async function spawnOrarioInput(orari, giornoselezionato, datiMeteo5Giorni, dati
 
     //Chiamo lo strato di servizio per ottenere idati meteo per il radio orario selezionato
     var datiMeteo = checkOrarioInput(orariRadio, giornoselezionato, datiMeteo5Giorni, timezone);
-    spawnSezioneRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone);
+    spawnTabelleRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone);
 
     //Aggiungo Listener per i radio appena creati
     aggiungiRadioListener(orariRadio, datiMeteo, giornoselezionato, datiMeteo5Giorni, timezone, datiInquinamento);
@@ -98,22 +112,8 @@ async function spawnOrarioInput(orari, giornoselezionato, datiMeteo5Giorni, dati
     $(content).hide().fadeIn(1000);
 }
 
-/**
- * Aggiungo dei listener sui radio button dell'orario in modo da aggiornare
- * dinamicamente la pagina in base all'input dell'orario
-**/
-function aggiungiRadioListener(orariRadio, datiMeteo, giornoselezionato, datiMeteo5Giorni, timezone, datiInquinamento) {
-    orariRadio.forEach((element) => {
-        element.addEventListener("click", () => {
-            //Chiamo lo strato di servizio per ottenere i nuovi dati meteo per il radio orario appena cliccato
-            datiMeteo = checkOrarioInput(orariRadio, giornoselezionato, datiMeteo5Giorni, timezone);
-            spawnSezioneRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone);
-        });
-    });
-}
-
 //Spawn del div risultato con le tabelle e la mappa al suo interno
-function spawnSezioneRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone) {
+function spawnTabelleRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, timezone) {
     //Azzero il result div
     var resultdiv = document.getElementsByClassName("resultdiv")[0];
     resultdiv.innerHTML = "";
@@ -256,4 +256,4 @@ function riempiTabellaInquinamento(datiInquinamento) {
     document.getElementById("nh3").innerHTML = datiInquinamento["components"]["nh3"] + " μg/m<sup>3</sup>";
 }
 
-export { spawnOrarioInput };
+export { spawnPaginaRisultato };
