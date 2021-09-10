@@ -51,9 +51,8 @@ button {
 }
 
 #navbuttons {
-  position: fixed;
-  bottom: 2%;
-  right: 2%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 #submitbtnforward {

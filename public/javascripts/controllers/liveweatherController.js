@@ -5,7 +5,6 @@ import { spawnPaginaGiorno } from '/javascripts/controllers/paginaGiornoControll
 import { spawnPaginaRisultato } from '/javascripts/controllers/paginaRisultatoController.js';
 import { requestApiKey  } from '../model/weatherAPI.js';
 import { api_key } from '/javascripts/model/weatherAPI.js'
-import { spawnPaginaRisultato } from './paginaRisultatoController.js';
 
 //Listener per bottoni di avanti e indietro e tasto invio
 document.getElementById('submitbtnforward').addEventListener('click', cambiaScenaAvanti)
