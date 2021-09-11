@@ -1,7 +1,6 @@
 var mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"]
 var giornisettimana = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"]
 function spawnPaginaGiorno(giorni) {
-    console.log(giorni)
     //Svuoto il div dinamico
     var dynamicdiv = document.getElementsByClassName('dynamicdiv')[0]
     dynamicdiv.innerHTML = ""
