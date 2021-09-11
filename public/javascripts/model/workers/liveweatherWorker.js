@@ -4,6 +4,8 @@ onmessage = async function (msg) {
     var lon = msg.data[0]
     var lat = msg.data[1]
     var api_key = msg.data[2]
+    url = 'http://api.openweathermap.org/data/2.5/air_pollution?lat=' + lat + '&lon=' + lon + '&appid=' + api_key
+    console.log(url)
     datiInquinamento = await fetch('http://api.openweathermap.org/data/2.5/air_pollution?lat=' + lat + '&lon=' + lon + '&appid=' + api_key)
     .then(response => {
         console.log("Ricevo: ", response.status);
