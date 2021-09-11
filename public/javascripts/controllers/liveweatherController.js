@@ -112,6 +112,7 @@ async function cambiaScenaAvanti() {
       //Salvo il giorno selezionato estraendolo dai radio
       document.getElementsByName('giornoprompt').forEach(element => {
         if (element.checked) {
+          //Salvo in giornoselezionato il giorno (numero)
           giornoselezionato = element.value.split("/")[0]
           return
         }

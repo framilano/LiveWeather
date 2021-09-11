@@ -41,10 +41,13 @@ function checkPaginaGiornoInput(giorniRadio, data5days, timezone) {
   data5days['list'].forEach(element => {
     date = new Date((element['dt'] + timezone) * 1000)
     if (date.getUTCDate() == giornoselezionato) {
-      begin = (date.getUTCHours() - 2)
-      if (begin == -1) begin = "23"
-      end = (date.getUTCHours() + 1).toString()
-      if (end == 24) end = "0"
+      //Fascia oraria = inizio: orariodati -2  e fine: orariodati+1
+      begin = (parseInt(date.getUTCHours()) - 2)
+      if (begin < 0) begin = begin + 24
+      if (begin == 24) begin = 0
+      end = (parseInt(date.getUTCHours()) + 1)
+      if (end < 0) end = end + 24
+      if (end == 24) end = 0
       orari.push(begin + "-" + end)
     }
   });
@@ -55,9 +58,9 @@ function checkPaginaGiornoInput(giorniRadio, data5days, timezone) {
 //Estrae dalla lista dei dati meteo dei prossimi 5 giorni solo i dati rilevanti per la data selezionata dall'utente
 function checkOrarioInput(orariRadio, giornoselezionato, data5days, timezone) {
   orariRadio.forEach(element => {
-    if (element.checked) orarioselezionato = element.value.split("-")[1] - 1
+    //L'orario nella request è il nostro inizio nella fascia oraria + 2 (% per gestire numeri maggiori di 24)
+    if (element.checked) orarioselezionato = (parseInt(element.value.split("-")[0]) + 2) % 24
   })
-
   giornoselezionato = giornoselezionato.split("/")[0]
   var datiMeteoTemp
   var datiMeteo = null
