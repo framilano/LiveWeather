@@ -7,14 +7,17 @@ var orarioselezionato = null
 function filtraGiorni(data5daysList, timezone) {
   var dates = []
   var current = ""
-  var day
+  var dayname
+  var daynumber
   var month
+  //Ricorda: Sunday is 0, Monday is 1, and so on.
   data5daysList.forEach(element => {
-    day = new Date((element['dt'] + timezone) * 1000).getUTCDate()
+    dayname = new Date((element['dt'] + timezone) * 1000).getUTCDay()
+    daynumber = new Date((element['dt'] + timezone) * 1000).getUTCDate()
     month = new Date((element['dt'] + timezone) * 1000).getUTCMonth()
-    if (day != current) {
-      dates.push(day + "-" + month)
-      current = day
+    if (daynumber != current) {
+      dates.push(dayname + "-" + daynumber + "-" + month)
+      current = daynumber
     }
   });
   return dates;
@@ -38,9 +41,10 @@ function checkPaginaGiornoInput(giorniRadio, data5days, timezone) {
   data5days['list'].forEach(element => {
     date = new Date((element['dt'] + timezone) * 1000)
     if (date.getUTCDate() == giornoselezionato) {
-      begin = (date.getUTCHours() - 3)
+      begin = (date.getUTCHours() - 2)
       if (begin == -1) begin = "23"
-      end = (date.getUTCHours()).toString()
+      end = (date.getUTCHours() + 1).toString()
+      if (end == 24) end = "0"
       orari.push(begin + "-" + end)
     }
   });
@@ -51,7 +55,7 @@ function checkPaginaGiornoInput(giorniRadio, data5days, timezone) {
 //Estrae dalla lista dei dati meteo dei prossimi 5 giorni solo i dati rilevanti per la data selezionata dall'utente
 function checkOrarioInput(orariRadio, giornoselezionato, data5days, timezone) {
   orariRadio.forEach(element => {
-    if (element.checked) orarioselezionato = element.value.split("-")[1]
+    if (element.checked) orarioselezionato = element.value.split("-")[1] - 1
   })
 
   giornoselezionato = giornoselezionato.split("/")[0]

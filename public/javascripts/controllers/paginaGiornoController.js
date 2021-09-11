@@ -1,6 +1,7 @@
 var mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"]
-
+var giornisettimana = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"]
 function spawnPaginaGiorno(giorni) {
+    console.log(giorni)
     //Svuoto il div dinamico
     var dynamicdiv = document.getElementsByClassName('dynamicdiv')[0]
     dynamicdiv.innerHTML = ""
@@ -14,7 +15,8 @@ function spawnPaginaGiorno(giorni) {
     var label
     var input
     var index = 0
-    var giorno
+    var giornonome
+    var giornonumero
     var mese
 
     //Creo toolbar per radio
@@ -26,22 +28,23 @@ function spawnPaginaGiorno(giorni) {
 
     //Creo i radio con i vari giorni al loro interno
     giorni.forEach(element => {
-        giorno = element.split("-")[0]
-        mese = element.split("-")[1]
+        giornonome = giornisettimana[parseInt(element.split("-")[0])]
+        giornonumero = element.split("-")[1]
+        mese = element.split("-")[2]
         label = document.createElement('label')
-        label.setAttribute('for', giorno)
-        label.innerHTML = giorno + " " + mesi[mese]
+        label.setAttribute('for', giornonumero)
+        label.innerHTML = giornonome + " " + giornonumero + " " + mesi[mese]
         input = document.createElement('input')
         input.setAttribute('type', 'radio')
         input.setAttribute('name', 'giornoprompt')
-        input.setAttribute('id', giorno)
-        input.setAttribute('value', giorno + "/" + (parseInt(mese) + 1))
+        input.setAttribute('id', giornonumero)
+        input.setAttribute('value', giornonumero + "/" + (parseInt(mese) + 1))
         radiotoolbar.appendChild(input)
         radiotoolbar.appendChild(label)
         if (index == 0) {
             input.setAttribute('checked', 'true')
-            document.getElementById(giorno).focus();
-            document.getElementById(giorno).select()
+            document.getElementById(giornonumero).focus();
+            document.getElementById(giornonumero).select()
         }
         index = 1
     })
