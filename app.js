@@ -4,7 +4,6 @@ var cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var liveweatherRouter = require('./routes/liveweather.js');
 var apikeyRouter = require('./routes/apikey.js');
 var dotenv = require('dotenv')

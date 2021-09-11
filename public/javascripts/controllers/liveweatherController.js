@@ -184,5 +184,4 @@ await requestApiKey()
 //Funzione iniziale appena caricato liveweather.ejs dalle views
 spawnIntro()
 
-
 export { cittàselezionata, label_giornata }
