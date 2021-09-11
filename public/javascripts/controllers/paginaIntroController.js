@@ -12,7 +12,7 @@ async function spawnIntro() {
     dynamicdiv.innerHTML = ""
 
     //Descrizione introduttiva
-    pIntro.innerHTML = "LiveWeather è un servizio meteo gratuito globale  con previsioni per i prossimi 5 giorni<br>"
+    pIntro.innerHTML = "LiveWeather è un servizio meteo gratuito globale  con previsioni per i prossimi 5 giorni (120 ore)<br>"
         + "I dati sono resi disponibili grazie alla piattaforma <a href=\"https://openweathermap.org/api\" target=\"_blank\">"
         + "OpenWeatherAPI</a> e <a href=\"https://aqicn.org/api/\" target=\"_blank\">AQI</a>"
 
