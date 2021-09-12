@@ -118,6 +118,17 @@ function spawnTabelleRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, ti
     var resultdiv = document.getElementsByClassName("resultdiv")[0];
     resultdiv.innerHTML = "";
 
+    //Spawn della mappa
+    var divMappa = document.createElement("div");
+    divMappa.setAttribute("id", "DivMappa");
+    var divMappaContainer = document.createElement("div");
+    divMappaContainer.setAttribute("id", "DivMappaContainer");
+    divMappaContainer.appendChild(divMappa);
+    document.getElementsByClassName("resultdiv")[0].appendChild(divMappaContainer);
+    spawnMappaMeteo(datiMeteo5Giorni["city"]["coord"]["lon"], datiMeteo5Giorni["city"]["coord"]["lat"],
+        "<h4>"+datiMeteo5Giorni["city"]["name"] + "</h4><br>Condizioni meteo - " + datiMeteo["weather"][0]["description"],
+        "/images/WeatherPNGs/" + datiMeteo["weather"]["0"]["icon"] + ".png");
+
     //Spawn delle tabelle
     spawnTabellaMeteo(datiMeteo);
     riempiTabellaMeteo(datiMeteo, datiMeteo5Giorni, timezone);
@@ -127,17 +138,6 @@ function spawnTabelleRisultato(datiMeteo, datiInquinamento, datiMeteo5Giorni, ti
         spawnTabellaInquinamento(datiInquinamento);
         riempiTabellaInquinamento(datiInquinamento);
     }
-
-    //Spawn della mappa
-    var divMappa = document.createElement("div");
-    divMappa.setAttribute("id", "DivMappa");
-    var divMappaContainer = document.createElement("div");
-    divMappaContainer.setAttribute("id", "DivMappaContainer");
-    divMappaContainer.appendChild(divMappa);
-    document.getElementsByClassName("resultdiv")[0].appendChild(divMappaContainer);
-    spawnMappaMeteo(datiMeteo5Giorni["city"]["coord"]["lon"], datiMeteo5Giorni["city"]["coord"]["lat"],
-        datiMeteo5Giorni["city"]["name"], "/images/WeatherPNGs/" + datiMeteo["weather"]["0"]["icon"] + ".png"
-    );
 }
 
 //Spawn della tabella Meteo
@@ -145,15 +145,11 @@ function spawnTabellaMeteo(datiMeteo) {
     var resultdiv = document.getElementsByClassName("resultdiv")[0];
 
     //Creo un p di descrizione del meteo e un'icona descrittiva
-    var img = document.createElement("img");
-    img.setAttribute("src", "/images/WeatherPNGs/" + datiMeteo["weather"][0]["icon"] + ".png");
-    img.setAttribute("title", datiMeteo["weather"][0]["description"]);
     var descriptionP = document.createElement("p");
     descriptionP.innerHTML =
-    "Condizioni meteo: " + datiMeteo["weather"][0]["description"] + "<br><br>" +
-    "Stai visualizzando le condizioni meteo di " + cittàselezionata +
-    " per il giorno " + label_giornata
-    
+        "Stai visualizzando le condizioni meteo di " + cittàselezionata +
+        " per il giorno " + label_giornata
+
 
     //Creo la tabella con i dettagli meteo
     var table = document.createElement("table");
@@ -171,13 +167,12 @@ function spawnTabellaMeteo(datiMeteo) {
         tr.appendChild(td);
         table.appendChild(tr);
     }
-    
+
     //Rimuovo il bordo inferiore dell'ultimo th e td, per evitare overlapping
     th.style.borderBottom = 0
     td.style.borderBottom = 0
 
     //Appendo immagine, descrizione e tabella meteo
-    resultdiv.appendChild(img);
     resultdiv.appendChild(descriptionP);
     resultdiv.appendChild(table);
 
@@ -188,8 +183,8 @@ function spawnTabellaMeteo(datiMeteo) {
 function spawnTabellaInquinamento() {
     var resultdiv = document.getElementsByClassName("resultdiv")[0];
     var descriptionP = document.createElement("p");
-    descriptionP.innerHTML = "Stai visualizzando le informazioni sulla qualità dell'aria <br>"+
-    "Per maggiori informazioni <a href=\"https://www.airnow.gov/aqi/aqi-basics/\" target=\"_blank\">AQI basics</a>"
+    descriptionP.innerHTML = "Stai visualizzando le informazioni sulla qualità dell'aria <br>" +
+        "Per maggiori informazioni <a href=\"https://www.airnow.gov/aqi/aqi-basics/\" target=\"_blank\">AQI basics</a>"
     var table = document.createElement("table");
     table.setAttribute("id", "inquinamentotable");
     var tr;
