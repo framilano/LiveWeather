@@ -107,9 +107,8 @@ async function spawnPaginaRisultato(orari, giornoselezionato, datiMeteo5Giorni, 
     //Aggiungo Listener per i radio appena creati
     aggiungiRadioListener(orariRadio, datiMeteo, giornoselezionato, datiMeteo5Giorni, timezone, datiInquinamento);
 
-    var content = document.getElementById('content')
     //Aggiungo effetto di fading in ingresso
-    $(content).hide().fadeIn(1000);
+    $(dynamicdiv).hide().fadeIn(1000);
 }
 
 //Spawn del div risultato con le tabelle e la mappa al suo interno

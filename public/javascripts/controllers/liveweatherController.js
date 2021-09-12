@@ -131,7 +131,7 @@ async function cambiaScenaAvanti() {
 
       //Scompare il tasto avanti
       document.getElementById('submitbtnforward').hidden = 1
-      document.getElementById('content').style.marginTop = "0%"
+      document.getElementsByClassName('dynamicdiv')[0].style.marginTop = "0%"
 
       //Richiedo lo spawn dei vari orari da cui scegliere insieme alle tabelle meteo e inquinamento, (mando solo il giorno senza il mese)
       spawnPaginaRisultato(orari, giornoselezionato, datiMeteo5Giorni, datiInquinamento, timezone)
@@ -155,7 +155,7 @@ function cambiaScenaIndietro() {
 
       //Scompare il tasto indietro
       document.getElementById('submitbtnback').hidden = 1
-      document.getElementById('content').style.marginTop = "7%"
+      document.getElementsByClassName('dynamicdiv')[0].style.marginTop = "7%"
       break;
 
     case "paginagiorno":
@@ -175,7 +175,7 @@ function cambiaScenaIndietro() {
 
       //Riappare il tasto avanti
       document.getElementById('submitbtnforward').hidden = 0
-      document.getElementById('content').style.marginTop = "7%"
+      document.getElementsByClassName('dynamicdiv')[0].style.marginTop = "7%"
       break
   }
 }

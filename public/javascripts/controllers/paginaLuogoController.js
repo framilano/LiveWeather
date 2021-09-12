@@ -47,10 +47,8 @@ async function spawnPaginaLuogo(cittàprecedente) {
     dynamicdiv.appendChild(pAttuale)
   }
 
-  //Prendo il content per aggiungere il fading
-  var content = document.getElementById('content')
   //Aggiungo effetto di fading in ingresso
-  $(content).hide().fadeIn(1000);
+  $(dynamicdiv).hide().fadeIn(1000);
 }
 
 export { spawnPaginaLuogo };
