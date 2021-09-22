@@ -40,6 +40,7 @@ button {
   border: none;
   border-radius: 4px;
   font-size: 100%;
+  cursor: pointer;
 }
 
 #meteotable {
@@ -135,6 +136,7 @@ button {
 }
 
 .radio-toolbar label {
+  cursor: pointer;
   display: inline-block;
   background-color: #404040;
   padding: 10px 20px;
@@ -142,6 +144,7 @@ button {
   font-size: 16px;
   border: 2px solid #444;
   border-radius: 4px;
+  margin: 1%;
 }
 
 .radio-toolbar input[type="radio"]:checked + label {
@@ -154,10 +157,6 @@ button {
 
 .radio-toolbar label:hover {
   background-color: #303030;
-}
-
-.radio-toolbar label{
-    margin: 1%;
 }
 
 .markerContent {
