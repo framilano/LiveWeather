@@ -104,11 +104,13 @@ async function cambiaScenaAvanti() {
     case "paginagiorno":
       //Ottengo gli orari possibili per il giorno selezionato
       orari = checkPaginaGiornoInput(document.getElementsByName('giornoprompt'), datiMeteo5Giorni, timezone)
-      //Se nullo, ripetere l'input
+      
+      //Se nullo, ripetere l'input (non dovrebbe essere possibile essendo la scelta limitata)
       if (orari == null) {
         alert("Inserisci un giorno valido")
         return
       }
+
       //Salvo il giorno selezionato estraendolo dai radio
       document.getElementsByName('giornoprompt').forEach(element => {
         if (element.checked) {
@@ -118,6 +120,7 @@ async function cambiaScenaAvanti() {
         }
       })
 
+      //Recupero label_giornata
       //Necessario Array.from poichè getElementsByTagName restituisce una HTMLCollection (che non è un array)
       //forEach funziona solo con gli array
       Array.from(document.getElementsByTagName('label')).forEach(element => {
