@@ -196,5 +196,17 @@ button {
   td {
     font-size: 75%;
   }
+
+  #submitbtnforward {
+    position: relative;
+    right: 2vw;
+    bottom: 2vh;
+  }
+  
+  #submitbtnback {
+    position: relative;
+    left: 2vw;
+    bottom: 2vh;
+  }
 }
 
