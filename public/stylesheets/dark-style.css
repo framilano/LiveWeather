@@ -198,13 +198,13 @@ button {
   }
 
   #submitbtnforward {
-    position: relative;
+    position: absolute;
     right: 2vw;
     bottom: 2vh;
   }
   
   #submitbtnback {
-    position: relative;
+    position: absolute;
     left: 2vw;
     bottom: 2vh;
   }
