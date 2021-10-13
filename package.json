@@ -2,7 +2,7 @@
   "name": "liveweather",
   "version": "0.0.0",
   "private": true,
-  "engine": {
+  "engines": {
     "node" : "^16.6.0",
     "npm" : "^8.0.0"
   },
