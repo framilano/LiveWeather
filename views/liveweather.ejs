@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='/stylesheets/light-style.css' id="stylesheet" />
+</head>
+
+<body>
+    <button title="themebutton" id="themeswitch"></button>
+    <h1>
+        <%= title %>
+    </h1>
+    <div class="dynamicdiv" id="intro"></div>
+    <button title="backbutton" hidden=1 id="submitbtnback"></button>
+    <button title="forwardbutton" id="submitbtnforward"></button>
+</body>
+
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://openlayers.org/api/2.13.1/OpenLayers.js"></script>
+<script src="/javascripts/controllers/themeController.js"></script>
+<script type="module" src="/javascripts/controllers/liveweatherController.js"></script>
